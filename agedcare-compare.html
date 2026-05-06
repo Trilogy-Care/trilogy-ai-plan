@@ -485,7 +485,7 @@
 <nav class="site-nav">
   <div class="snav-brand">
     <span class="snav-brand-name">Trilogy Care &nbsp;&middot;&nbsp; <span>AI Innovations</span></span>
-    <span class="snav-day">Day 44 of 90</span>
+    <span class="snav-day">Day 46 of 90</span>
   </div>
   <div class="snav-tabs">
     <a class="snav-tab" href="roadmap-visual.html"><span class="snav-dot" style="background:#3b82f6;"></span> Tracker</a>
@@ -1945,9 +1945,135 @@
 
 </div>
 
+<!-- DATA GAPS - TC vs COMPETITOR PRICING COVERAGE -->
+<div class="content">
+  <div class="section-header reveal">
+    <div class="section-badge blocked">Data Gaps</div>
+    <div>
+      <div class="section-title">Pricing data — TC vs competitor coverage</div>
+      <div class="section-sub">What we publish for ourselves vs what we know about competitors. Sourced from Issac's Databricks pipeline (<code>published_prices_web</code> + <code>competitor_rate_cards_web</code>), refreshed weekly. Last refresh: 30 April 2026. Underlying scraper: Micro Scraper team (separate from Issac).</div>
+    </div>
+  </div>
+
+  <div class="compare-table-wrap reveal">
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Dimension</th>
+          <th>TC (published_prices_web)</th>
+          <th>Competitor (competitor_rate_cards_web)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Total rows</td><td class="val">71,436</td><td class="val">165,600</td></tr>
+        <tr><td>Distinct services</td><td class="val">39</td><td class="val">23</td></tr>
+        <tr><td>Postcodes covered</td><td class="val">2,640</td><td class="val">1,800</td></tr>
+        <tr><td>States</td><td class="val">8 (all)</td><td class="val">8 (all)</td></tr>
+        <tr><td>Day-type split</td><td class="lose">None — single rate per service-postcode</td><td class="win">weekday / sat / sun / public_holiday</td></tr>
+        <tr><td>Quartile data</td><td class="val">p25 / median / p75</td><td class="val">p25 / median / p75</td></tr>
+        <tr><td>Volume signal</td><td class="val">n_distinct_packages, n_transactions</td><td class="val">n_distinct_suppliers, n_rate_cards</td></tr>
+        <tr><td>Rows truly postcode-specific</td><td class="lose">7.3% (rest = state / SA3 / national)</td><td class="lose">5.0% (rest = MMM remoteness tier)</td></tr>
+        <tr><td>Last refresh</td><td class="val">2026-04-30 16:18 AEST</td><td class="val">2026-04-30 10:44 AEST</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- The gaps as cards -->
+  <div class="new-grid reveal" style="margin-top: 24px;">
+
+    <div class="new-card" style="border-color: rgba(231,76,60,0.35);">
+      <div class="new-card-title">Personal Care has no competitor benchmark</div>
+      <div class="new-card-desc">The most-searched service on the site. TC publishes it ("Assistance with self-care and activities of daily living") but the competitor view doesn't include it at all. Likely a Micro Scraper limitation — personal care is bundled inside packages rather than published as a line item on rate cards. 22 other TC services also have no competitor counterpart.</div>
+      <div class="new-tag" style="color: var(--red);">Highest priority gap</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(243,156,18,0.35);">
+      <div class="new-card-title">Most "postcode" prices are actually geo-fallbacks</div>
+      <div class="new-card-desc">Both datasets file by postcode but most rows inside are higher-level fallbacks. For Toorak 3142 and Hobart 7000, both datasets are 100% fallback — zero postcode-specific rows. Sydney CBD 2000 is 0% TC postcode-specific. We surface the actual coverage_label so users see "Typical for Major city" vs "In postcode 2750" — but expectation-setting matters.</div>
+      <div class="new-tag" style="color: var(--amber);">Honest labelling required</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(243,156,18,0.35);">
+      <div class="new-card-title">TC has no day-type split (weekday / sat / sun / PH)</div>
+      <div class="new-card-desc">Competitor data has all four day-types per service-postcode. TC published_prices_web has a single rate column. The underlying sah_services Postgres table holds the four columns per provider, so the data exists somewhere — the Databricks view just doesn't surface it. Without it we can't show "TC Saturday rate vs market Saturday rate" like-for-like.</div>
+      <div class="new-tag" style="color: var(--amber);">Pipeline can be extended</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(243,156,18,0.35);">
+      <div class="new-card-title">858 postcodes have TC data but no competitor file</div>
+      <div class="new-card-desc">TC files: 2,640 postcodes. Competitor files: 1,800. Overlap: 1,782. So ~858 postcodes (mostly rural/remote — Tasmania, NT, remote WA) show only TC pricing with no market benchmark. Either Micro Scraper hasn't covered these areas yet, or those competitors genuinely don't publish rate cards.</div>
+      <div class="new-tag" style="color: var(--amber);">Geo coverage gap</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(46,134,222,0.3);">
+      <div class="new-card-title">17 services match exactly across both views</div>
+      <div class="new-card-desc">Cleaning, gardening, meal prep/delivery, transport, social support, nursing assistant care, allied health, respite, home maintenance, care management. These are the rows where the suburb comparison matrix can show TC price + competitor median side by side. Every other row falls back to TC-only.</div>
+      <div class="new-tag" style="color: var(--light-blue);">17 of 39 TC services</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(46,134,222,0.3);">
+      <div class="new-card-title">6 services in competitor view that TC doesn't publish</div>
+      <div class="new-card-desc">Mostly expense / consumable / product rows: home modification products, nursing care consumables, expenses for home maintenance, indirect transport. Less critical for direct-care comparison but worth noting if we ever want to surface "consumables cost in your suburb" content.</div>
+      <div class="new-tag" style="color: var(--light-blue);">Competitor-only services</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(0,184,148,0.3);">
+      <div class="new-card-title">22 TC-only services worth flagging for Micro Scraper</div>
+      <div class="new-card-desc">RN / EN clinical care, OT, physio, podiatry, psychology, exercise physiology, music therapy, counselling, diet, continence, accompanied activities, laundry, shopping assistance, more. If Micro Scraper added rate-card coverage for even 3-4 of the high-traffic ones (physio, OT, podiatry), the suburb matrix would almost double its useful coverage.</div>
+      <div class="new-tag" style="color: var(--teal);">Highest leverage ask</div>
+    </div>
+
+    <div class="new-card" style="border-color: rgba(0,184,148,0.3);">
+      <div class="new-card-title">Both datasets refresh weekly, monitoring now in place</div>
+      <div class="new-card-desc">PR #143 added /api/health/competitor-prices and /api/health/published-prices endpoints that report refresh-age + a status badge (ok / warning / stale). console.warn fires when age > 14 days, so a broken sync surfaces in CloudWatch / Vercel logs. Manual checks no longer needed.</div>
+      <div class="new-tag" style="color: var(--teal);">Live monitoring</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- QUESTIONS FOR ISSAC -->
+<div class="content">
+  <div class="section-header reveal">
+    <div class="section-badge ai">Async</div>
+    <div>
+      <div class="section-title">Outstanding questions for Issac</div>
+      <div class="section-sub">Sent to Issac on Teams — answers will unblock the next round of competitor coverage. Word doc copy at <code>~/Downloads/issac-pricing-questions.docx</code>.</div>
+    </div>
+  </div>
+
+  <div class="new-grid reveal" style="margin-top: 24px;">
+
+    <div class="new-card">
+      <div class="new-card-title">Q1 · Personal Care exclusion — deliberate or fixable?</div>
+      <div class="new-card-desc">Is Personal Care deliberately out of competitor_rate_cards_web (e.g. Micro Scraper can't capture it because it's bundled inside packages) or is it a known gap to ask Micro Scraper to fix? If fixable, what's the realistic timeline?</div>
+      <div class="new-tag">Awaiting reply</div>
+    </div>
+
+    <div class="new-card">
+      <div class="new-card-title">Q2 · Postcode-level threshold — where's the cutoff?</div>
+      <div class="new-card-desc">Is there a documented sample-size threshold upstream (minimum N rate cards before a postcode emits a postcode-level row vs falling back to MMM)? Plan to lower it, or accept the upstream sample is just thin and design around the fallback label?</div>
+      <div class="new-tag">Awaiting reply</div>
+    </div>
+
+    <div class="new-card">
+      <div class="new-card-title">Q3 · Can published_prices_web get a day_type column?</div>
+      <div class="new-card-desc">competitor_rate_cards_web has weekday / sat / sun / PH. published_prices_web has a single rate. The underlying sah_services Postgres table has all four columns per provider — could the view be extended with a day_type column populated from those?</div>
+      <div class="new-tag">Awaiting reply</div>
+    </div>
+
+    <div class="new-card">
+      <div class="new-card-title">Q4 · Documented Micro Scraper coverage map?</div>
+      <div class="new-card-desc">We have TC files for 2,640 postcodes but competitor files for only 1,800. Is there a documented map of where Micro Scraper has good vs sparse vs zero coverage? Helps decide whether to flag "no competitor data" gracefully or actively ask for fills in specific high-priority regions.</div>
+      <div class="new-tag">Awaiting reply</div>
+    </div>
+
+  </div>
+</div>
+
 <!-- FOOTER -->
 <div class="page-footer">
-  <div class="footer-note">AgedCare Compare - Trilogy Care - Confidential - Updated 23 April 2026 - Source: Jira export (TPW project, 100 tickets) + Imran's build log</div>
+  <div class="footer-note">AgedCare Compare - Trilogy Care - Confidential - Updated 6 May 2026 - Source: Jira export (TPW project, 100 tickets) + Imran's build log + Issac's Databricks pipeline snapshot</div>
 </div>
 
 <script>
