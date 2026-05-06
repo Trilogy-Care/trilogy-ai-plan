@@ -313,7 +313,7 @@
 <nav class="site-nav">
   <div class="snav-brand">
     <span class="snav-brand-name">Trilogy Care &nbsp;&middot;&nbsp; <span>AI Innovations</span></span>
-    <span class="snav-day">Day 44 of 90</span>
+    <span class="snav-day">Day 46 of 90</span>
   </div>
   <div class="snav-tabs">
     <a class="snav-tab" href="roadmap-visual.html"><span class="snav-dot" style="background:#3b82f6;"></span> Tracker</a>
@@ -342,9 +342,9 @@
   <h1>GROW <span class="grad">Build Log</span></h1>
   <p class="lede">Every shipped change in <strong style="color: var(--text);">tc-grow-applications</strong>, day by day. From Day&nbsp;0 (the first commit on 7&nbsp;April) through to today &mdash; grouped by initiative, with the full git history below.</p>
   <div class="hero-meta">
-    <span class="pill teal">Day 20 of GROW build</span>
-    <span class="pill">Day 44 of Trilogy</span>
-    <span class="pill muted">Last shipped: 3&nbsp;May&nbsp;2026</span>
+    <span class="pill teal">Day 22 of GROW build</span>
+    <span class="pill">Day 46 of Trilogy</span>
+    <span class="pill muted">Last shipped: 5&nbsp;May&nbsp;2026</span>
     <span class="pill muted">Auto-derived from git</span>
   </div>
 </div>
@@ -352,44 +352,44 @@
 <!-- HEADLINE STATS -->
 <section>
   <div class="sec-eyebrow">By the Numbers</div>
-  <div class="sec-title">27 days, 248 commits, one platform</div>
+  <div class="sec-title">29 days, 271 commits, one platform</div>
   <div class="sec-sub">Headline output of the GROW build window so far. All numbers are pulled directly from the <code style="color:var(--text);">tc-grow-applications</code> git history since the first commit on 7 April 2026.</div>
 
   <div class="stats-grid">
     <div class="stat blue">
       <div class="s-label">Commits</div>
-      <div class="s-value">248</div>
-      <div class="s-sub">across <strong style="color:var(--text);">20 active days</strong></div>
+      <div class="s-value">271</div>
+      <div class="s-sub">across <strong style="color:var(--text);">23 active days</strong></div>
     </div>
     <div class="stat teal">
       <div class="s-label">Pull requests merged</div>
-      <div class="s-value">115</div>
+      <div class="s-value">137</div>
       <div class="s-sub">squash-merged via review queue</div>
     </div>
     <div class="stat amber">
       <div class="s-label">Files touched</div>
-      <div class="s-value">442</div>
+      <div class="s-value">486</div>
       <div class="s-sub">unique files modified or created</div>
     </div>
     <div class="stat purple">
       <div class="s-label">Initiatives</div>
-      <div class="s-value">14</div>
+      <div class="s-value">15</div>
       <div class="s-sub">distinct workstreams shipped</div>
     </div>
     <div class="stat lightblue">
       <div class="s-label">Lines added</div>
-      <div class="s-value">+113,357</div>
+      <div class="s-value">+123,900</div>
       <div class="s-sub">net new code across backend, frontend, infra</div>
     </div>
     <div class="stat red">
       <div class="s-label">Lines removed</div>
-      <div class="s-value">&minus;4,422</div>
+      <div class="s-value">&minus;4,830</div>
       <div class="s-sub">refactors, dead-code purges, sidebar tidy-up</div>
     </div>
     <div class="stat blue">
       <div class="s-label">Active days</div>
-      <div class="s-value">20</div>
-      <div class="s-sub">of <strong style="color:var(--text);">27</strong> elapsed since Day 0</div>
+      <div class="s-value">23</div>
+      <div class="s-sub">of <strong style="color:var(--text);">29</strong> elapsed since Day 0</div>
     </div>
     <div class="stat teal">
       <div class="s-label">Top day</div>
@@ -687,6 +687,28 @@
       </ul>
     </div>
 
+    <!-- 15 AgedCare Compare agent fleet -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">AgedCare Compare agent fleet (TRI-402)</div>
+        <div class="init-range">4&ndash;5 May</div>
+      </div>
+      <div class="init-desc">Net-new top-level area for agedcarecompare.com.au. Backend foundation, GitHub App service skeleton, Playwright synthetic checks, four wired agents (QA / Site Health, Competitor Intel, Copywriter with approval-triggers-PR, Broken Link Monitor) and an admin model-per-agent setting. 19 commits in one day &mdash; the largest single-day cascade since 23 April.</div>
+      <div class="init-tags">
+        <span class="init-tag fresh">Fresh</span>
+        <span class="init-tag">Agents</span>
+        <span class="init-tag">Backend</span>
+      </div>
+      <ul class="init-list">
+        <li>New top-level <code>/aged-care-compare</code> area + Playwright screenshot/synthetic infra</li>
+        <li><strong>Phase 1:</strong> backend foundation + Broken Link Monitor</li>
+        <li><strong>Phase 2:</strong> QA / Site Health, Competitor Intel, Copywriter agents wired to real endpoints</li>
+        <li><strong>Phase 3:</strong> GitHub App service skeleton (approval &rarr; PR flow)</li>
+        <li><strong>Phase 4:</strong> per-agent LLM model setting persisted to backend</li>
+        <li>Site-diving agents <strong>paused</strong> until <code>agedcarecompare.com.au</code> DNS resolves (parked at Crazy Domains)</li>
+      </ul>
+    </div>
+
   </div>
 </section>
 
@@ -698,16 +720,59 @@
 
   <div class="timeline-wrap">
     <div class="timeline-toolbar">
-      <span class="tt-label">20 active days &middot; 248 commits</span>
+      <span class="tt-label">23 active days &middot; 271 commits</span>
       <button class="tt-btn" id="expand-toggle" type="button">Expand all</button>
     </div>
     <div class="timeline" id="timeline">
+
+      <!-- 2026-05-05 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">5 May 2026</div>
+          <div class="day-num">Tue &middot; Day 29</div>
+          <span class="day-count">2 commits</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix ci">ci</span><span class="di-text">add parallel Docker build validation to surface latent issues (#149)</span></div>
+          <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">aged-care-compare: pause site-diving agents until DNS resolved (#148)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-04 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">4 May 2026</div>
+          <div class="day-num">Mon &middot; Day 28</div>
+          <span class="day-count">19 commits</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: scaffold new top-level area for AgedCare Compare agents (#125)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: Playwright infra for screenshots + synthetic checks (#128)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: backend foundation + Broken Link Monitor (Phase 1 of TRI-402) (#129)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: GitHub App service skeleton (Phase 3 of TRI-402) (#127)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: wire QA / Site Health agent (Phase 2a of TRI-402) (#133)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: wire Competitor Intel agent (Phase 2b of TRI-402) (#134)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: wire Copywriter agent + approval-triggers-PR flow (Phase 2d of TRI-402) (#137)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: persist per-agent model setting (Phase 4 of TRI-402) (#135)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">aged-care-compare: wire frontend to real backend endpoints (#136)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">agents-activity: pixel-art Agent House view (#131)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">comms-intake: auto-run alembic migrations before tests so dev DBs match CI (#132)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">aged-care-compare: repair syntax errors from #134 merge (#139)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">strip 2 stray conflict markers from #135 merge (env.py + config.py) (#140)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">alembic: strip env.py conflict marker re-introduced by #136 (#141)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">aged-care-compare: mock getAgentSettings/updateAgentSettings in AgentPanelPage test (#142)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">models: strip __init__.py conflict marker re-introduced by #136 (#143)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">aged-care-compare: restore router + celery from clean pre-#136 state (#144)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">ci: unblock build by fixing test failures from TRI-402 merge cascade (#146)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">aged-care-compare: mark agent sub-pages as 'use client' to fix prerender (#147)</span></div>
+        </div>
+      </div>
 
       <!-- 2026-05-03 -->
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">3 May 2026</div>
-          <div class="day-num">Sat &middot; Day 27</div>
+          <div class="day-num">Sun &middot; Day 27</div>
           <span class="day-count">10 commits</span>
         </div>
         <div class="day-items">
@@ -728,7 +793,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">2 May 2026</div>
-          <div class="day-num">Fri &middot; Day 26</div>
+          <div class="day-num">Sat &middot; Day 26</div>
           <span class="day-count">1 commit</span>
         </div>
         <div class="day-items">
@@ -740,7 +805,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">1 May 2026</div>
-          <div class="day-num">Thu &middot; Day 25</div>
+          <div class="day-num">Fri &middot; Day 25</div>
           <span class="day-count">13 commits</span>
         </div>
         <div class="day-items">
@@ -764,7 +829,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">30 Apr 2026</div>
-          <div class="day-num">Wed &middot; Day 24</div>
+          <div class="day-num">Thu &middot; Day 24</div>
           <span class="day-count">22 commits</span>
         </div>
         <div class="day-items">
@@ -797,7 +862,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">29 Apr 2026</div>
-          <div class="day-num">Tue &middot; Day 23</div>
+          <div class="day-num">Wed &middot; Day 23</div>
           <span class="day-count">10 commits</span>
         </div>
         <div class="day-items">
@@ -818,7 +883,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">28 Apr 2026</div>
-          <div class="day-num">Mon &middot; Day 22</div>
+          <div class="day-num">Tue &middot; Day 22</div>
           <span class="day-count">15 commits</span>
         </div>
         <div class="day-items">
@@ -844,7 +909,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">27 Apr 2026</div>
-          <div class="day-num">Sun &middot; Day 21</div>
+          <div class="day-num">Mon &middot; Day 21</div>
           <span class="day-count">18 commits</span>
         </div>
         <div class="day-items">
@@ -872,7 +937,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">26 Apr 2026</div>
-          <div class="day-num">Sat &middot; Day 20</div>
+          <div class="day-num">Sun &middot; Day 20</div>
           <span class="day-count">27 commits</span>
         </div>
         <div class="day-items">
@@ -906,7 +971,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">25 Apr 2026</div>
-          <div class="day-num">Fri &middot; Day 19</div>
+          <div class="day-num">Sat &middot; Day 19</div>
           <span class="day-count">3 commits</span>
         </div>
         <div class="day-items">
@@ -920,7 +985,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">24 Apr 2026</div>
-          <div class="day-num">Thu &middot; Day 18</div>
+          <div class="day-num">Fri &middot; Day 18</div>
           <span class="day-count">30 commits</span>
         </div>
         <div class="day-items">
@@ -961,7 +1026,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">23 Apr 2026</div>
-          <div class="day-num">Wed &middot; Day 17</div>
+          <div class="day-num">Thu &middot; Day 17</div>
           <span class="day-count">38 commits</span>
         </div>
         <div class="day-items">
@@ -1003,7 +1068,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">22 Apr 2026</div>
-          <div class="day-num">Tue &middot; Day 16</div>
+          <div class="day-num">Wed &middot; Day 16</div>
           <span class="day-count">13 commits</span>
         </div>
         <div class="day-items">
@@ -1027,7 +1092,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">21 Apr 2026</div>
-          <div class="day-num">Mon &middot; Day 15</div>
+          <div class="day-num">Tue &middot; Day 15</div>
           <span class="day-count">14 commits</span>
         </div>
         <div class="day-items">
@@ -1052,7 +1117,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">20 Apr 2026</div>
-          <div class="day-num">Sun &middot; Day 14</div>
+          <div class="day-num">Mon &middot; Day 14</div>
           <span class="day-count">6 commits</span>
         </div>
         <div class="day-items">
@@ -1069,7 +1134,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">19 Apr 2026</div>
-          <div class="day-num">Sat &middot; Day 13</div>
+          <div class="day-num">Sun &middot; Day 13</div>
           <span class="day-count">2 commits</span>
         </div>
         <div class="day-items">
@@ -1082,7 +1147,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">17 Apr 2026</div>
-          <div class="day-num">Thu &middot; Day 11</div>
+          <div class="day-num">Fri &middot; Day 11</div>
           <span class="day-count">3 commits</span>
         </div>
         <div class="day-items">
@@ -1096,7 +1161,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">16 Apr 2026</div>
-          <div class="day-num">Wed &middot; Day 10</div>
+          <div class="day-num">Thu &middot; Day 10</div>
           <span class="day-count">2 commits</span>
         </div>
         <div class="day-items">
@@ -1109,7 +1174,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">15 Apr 2026</div>
-          <div class="day-num">Tue &middot; Day 9</div>
+          <div class="day-num">Wed &middot; Day 9</div>
           <span class="day-count">9 commits</span>
         </div>
         <div class="day-items">
@@ -1129,7 +1194,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">14 Apr 2026</div>
-          <div class="day-num">Mon &middot; Day 8</div>
+          <div class="day-num">Tue &middot; Day 8</div>
           <span class="day-count">6 commits</span>
         </div>
         <div class="day-items">
@@ -1146,7 +1211,7 @@
       <div class="day-block">
         <div class="day-meta">
           <div class="day-date">8 Apr 2026</div>
-          <div class="day-num">Tue &middot; Day 2</div>
+          <div class="day-num">Wed &middot; Day 2</div>
           <span class="day-count">7 commits</span>
         </div>
         <div class="day-items">
@@ -1164,7 +1229,7 @@
       <div class="day-block" style="background: rgba(0,184,148,0.04);">
         <div class="day-meta">
           <div class="day-date" style="color: var(--teal);">7 Apr 2026</div>
-          <div class="day-num" style="color: var(--teal);">Mon &middot; Day 0</div>
+          <div class="day-num" style="color: var(--teal);">Tue &middot; Day 0</div>
           <span class="day-count" style="color: var(--teal); border-color: rgba(0,184,148,0.3); background: rgba(0,184,148,0.08);">First commit</span>
         </div>
         <div class="day-items">
@@ -1217,7 +1282,7 @@
 </section>
 
 <footer>
-  <div class="fl">Last updated: <strong style="color: var(--text);">4 May 2026</strong> &middot; Day 20 of GROW &middot; Day 44 of Trilogy</div>
+  <div class="fl">Last updated: <strong style="color: var(--text);">6 May 2026</strong> &middot; Day 22 of GROW &middot; Day 46 of Trilogy</div>
   <div class="fr">Auto-derived from <a href="https://github.com/Trilogy-Care/tc-grow-applications" target="_blank">tc-grow-applications</a> git history.</div>
 </footer>
 
