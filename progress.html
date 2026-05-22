@@ -1202,6 +1202,20 @@
     <p class="page-sub">Imran Mehmood &middot; Day 62 of 90 &middot; Started 4 March 2026 &middot; Last updated 22 May 2026 &middot; Week-by-week timeline, the work board, and the full GROW build log in one place.</p>
   </div>
 
+  <!-- ════════ THIS WEEK'S FOCUS ════════ -->
+  <div class="section reveal" style="background:var(--green-light); border-color:#bbf7d0;">
+    <div class="section-label" style="color:#16a34a">This Week's Focus &middot; 19&ndash;23 May</div>
+    <div class="section-title">Where the Effort Is Going Right Now</div>
+    <div class="section-desc" style="margin-bottom:16px;">The current week's priorities, ahead of Nick's return on Tuesday 26 May.</div>
+    <ul class="init-list" style="border-top:none; padding-top:0;">
+      <li><strong>Call Quality Portal Phases 3&ndash;5</strong> delivered front-to-back &mdash; AI-scored review, coaching cards, Teams delivery and the Aircall post-call webhook.</li>
+      <li><strong>Elias Queue</strong> built &mdash; a GitHub backlog repo for triaged improvement items.</li>
+      <li><strong>This AI plan site</strong> reviewed and restructured into the clean 7-tab layout.</li>
+      <li><strong>Productivity audit and the Nick report</strong> prepared for his return on Tuesday 26 May.</li>
+      <li>~170 distinct changes shipped across 4 codebases in 7 days.</li>
+    </ul>
+  </div>
+
   <!-- ════════ SUMMARY STATS ════════ -->
   <!-- SUMMARY STATS ROW 1: OUTPUTS -->
   <div class="stats-row reveal">
@@ -2437,6 +2451,93 @@
         <div class="if-label">Pending</div>
         <div class="if-title">Brand Intelligence API access</div>
         <div class="if-detail">Brand Intelligence needs GA4, Search Console and SEMrush sign-off from Tim (CTO) and Paul. Still blocked &mdash; Nick to facilitate on his return.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ WHAT'S NEXT — DAYS 63-90 & BEYOND ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#2563eb">Roadmap</div>
+    <div class="section-title">What's Next &mdash; Days 63&ndash;90 &amp; Beyond</div>
+    <div class="section-desc">The forward backlog, grouped by horizon. ~28 days remain in the 90-day stand-up.</div>
+
+    <!-- Next 2 weeks -->
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#16a34a;margin-bottom:12px;">Next 2 Weeks</div>
+    <div class="inflight-grid" style="margin-bottom:24px;">
+      <div class="inflight-card" style="background:var(--green-light); border-color:#bbf7d0;">
+        <div class="if-label" style="color:#16a34a;">Reporting</div>
+        <div class="if-title">Nick report for Tuesday 26 May</div>
+        <div class="if-detail">Full progress report ready for Nick's return &mdash; productivity audit, the 7-tab AI plan site, and the Day-62 KPI position.</div>
+      </div>
+      <div class="inflight-card" style="background:var(--green-light); border-color:#bbf7d0;">
+        <div class="if-label" style="color:#16a34a;">Open PRs</div>
+        <div class="if-title">Close out the three open GROW PRs</div>
+        <div class="if-detail">Merge <code>#382</code> (LLM-usage dashboard), <code>#380</code> (file_extraction off the Anthropic SDK) and <code>#388</code> (repo-root declutter).</div>
+      </div>
+      <div class="inflight-card" style="background:var(--green-light); border-color:#bbf7d0;">
+        <div class="if-label" style="color:#16a34a;">Quality</div>
+        <div class="if-title">Call Quality drift fixes &mdash; first batch</div>
+        <div class="if-detail">Begin working the 15 triaged improvement items (Critical + High GROW drift, Phase 3 risks) queued in the Elias Queue.</div>
+      </div>
+    </div>
+
+    <!-- Days 63-90 -->
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#2563eb;margin-bottom:12px;">Days 63&ndash;90</div>
+    <div class="inflight-grid" style="margin-bottom:24px;">
+      <div class="inflight-card" style="background:var(--blue-light); border-color:#bfdbfe;">
+        <div class="if-label" style="color:#2563eb;">Call Quality</div>
+        <div class="if-title">Work through the 15-item drift backlog</div>
+        <div class="if-detail">Clear the triaged Critical and High improvement items, plus the Phase 3 risk fixes, against the live Call Quality Portal.</div>
+      </div>
+      <div class="inflight-card" style="background:var(--blue-light); border-color:#bfdbfe;">
+        <div class="if-label" style="color:#2563eb;">Paid Ads v2</div>
+        <div class="if-title">Tier 1 &mdash; ad previews + CAPI health</div>
+        <div class="if-detail">First tier of Paid Ads v2: in-app ad previews and Conversions API health monitoring, ahead of lead-quality scoring.</div>
+      </div>
+      <div class="inflight-card" style="background:var(--blue-light); border-color:#bfdbfe;">
+        <div class="if-label" style="color:#2563eb;">Marketing Intelligence</div>
+        <div class="if-title">FY27 brief &mdash; Phase 0 workshop</div>
+        <div class="if-detail">Run Stephen's FY27 Marketing Intelligence Brief through its Phase 0 workshop and scope the phases that follow.</div>
+      </div>
+      <div class="inflight-card" style="background:var(--blue-light); border-color:#bfdbfe;">
+        <div class="if-label" style="color:#2563eb;">TCPW</div>
+        <div class="if-title">Land the open TCPW PRs</div>
+        <div class="if-detail">Ship SaH national benchmarks + price-observation ledger (<code>#341</code>), route lead forms through the TC Graph endpoint (<code>#340</code>), and clear Luke's round-2 changes (<code>#339</code> / <code>#328</code>).</div>
+      </div>
+      <div class="inflight-card" style="background:var(--blue-light); border-color:#bfdbfe;">
+        <div class="if-label" style="color:#2563eb;">Data</div>
+        <div class="if-title">MAC scraper through Akamai</div>
+        <div class="if-detail">Continue running the My Aged Care scraper pipeline (Mike owns it, Issac advising), working through the Akamai bot-protection layer.</div>
+      </div>
+    </div>
+
+    <!-- Beyond 90 days -->
+    <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#ea580c;margin-bottom:12px;">Beyond 90 Days</div>
+    <div class="inflight-grid">
+      <div class="inflight-card">
+        <div class="if-label">Paid Ads v2</div>
+        <div class="if-title">Tiers 2&ndash;3 &mdash; lead quality + attribution</div>
+        <div class="if-detail">Zoho lead-quality scoring, then Databricks cross-channel attribution &mdash; the later tiers of the Paid Ads v2 plan.</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">Attribution</div>
+        <div class="if-title">Multi-touch attribution</div>
+        <div class="if-detail">Full multi-touch capture, blocked on site-side pixel plumbing rather than modelling work.</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">SEO</div>
+        <div class="if-title">12-month organic growth plan</div>
+        <div class="if-detail">Grow trilogycare.com.au organic traffic from ~11.7k to 50k visits/month over a 12-month horizon.</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">TCPW</div>
+        <div class="if-title">Scraper + competitor pricing</div>
+        <div class="if-detail">Scraper fine-tuning, competitor pricing into Postgres, and continuing the Luke / Leslie feedback rounds.</div>
+      </div>
+      <div class="inflight-card judgment">
+        <div class="if-label">Parked / Watch</div>
+        <div class="if-title">Prezzee, Aircall, journalist API</div>
+        <div class="if-detail">Prezzee review-voucher integration, a deeper Aircall integration, and external journalist-API decisions &mdash; parked, to revisit when dependencies clear.</div>
       </div>
     </div>
   </div>
