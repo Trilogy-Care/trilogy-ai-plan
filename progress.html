@@ -1,0 +1,2518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress | Day 62 of 90</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8f9fb;
+      --card: #ffffff;
+      --card-inner: #f9fafb;
+      --border: #eef0f2;
+      --border-light: #f3f4f6;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --text-faint: #cbd5e1;
+      --blue: #3b82f6;
+      --blue-light: #eff6ff;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --orange: #ea580c;
+      --orange-light: #fff7ed;
+      --purple: #7c3aed;
+      --purple-light: #f5f3ff;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --pink: #ec4899;
+      --cyan: #0ea5e9;
+      --indigo: #6366f1;
+      --amber: #f59e0b;
+      --teal: #14b8a6;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
+      --shadow-md: 0 2px 4px rgba(0,0,0,0.03), 0 4px 12px rgba(0,0,0,0.05);
+      --shadow-lg: 0 4px 6px rgba(0,0,0,0.02), 0 10px 30px rgba(0,0,0,0.06);
+      --shadow-xl: 0 8px 16px rgba(0,0,0,0.04), 0 20px 50px rgba(0,0,0,0.08);
+      --radius: 14px;
+      --radius-sm: 10px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      padding: 0;
+      line-height: 1.5;
+    }
+
+    /* Subtle dot grid background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: radial-gradient(circle, #d1d5db 0.5px, transparent 0.5px);
+      background-size: 24px 24px;
+      opacity: 0.3;
+    }
+
+    .page-container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 40px 40px 80px;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── PAGE HEADER ─── */
+    .page-header {
+      margin-bottom: 40px;
+    }
+
+    .page-title {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .page-heading {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+    }
+
+    .page-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 36px;
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+
+    .section:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      margin-bottom: 4px;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .section-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 28px;
+      font-weight: 500;
+    }
+
+    /* ─── SUMMARY STATS ─── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border-radius: var(--radius-sm);
+      padding: 22px 22px 18px;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Subtle top accent gradient */
+    .stat-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-color, #3b82f6), transparent);
+      opacity: 0.6;
+    }
+
+    .stat-num {
+      font-size: 34px;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 6px;
+      letter-spacing: -0.03em;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .stat-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    /* ─── TIMELINE ─── */
+    .timeline-container {
+      position: relative;
+    }
+
+    .timeline-spine {
+      position: relative;
+      width: 100%;
+      height: 5px;
+      background: var(--border);
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .timeline-spine-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 5px;
+      width: 68%;
+      background: linear-gradient(90deg, #3b82f6, #22c55e);
+      border-radius: 3px;
+      box-shadow: 0 0 12px rgba(34,197,94,0.25);
+    }
+
+    .timeline-dot {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      top: -5px;
+      transform: translateX(-50%);
+      border: 2.5px solid #fff;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      transition: transform 0.2s ease;
+    }
+
+    .timeline-dot:hover {
+      transform: translateX(-50%) scale(1.3);
+    }
+
+    .timeline-columns {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 10px;
+    }
+
+    .tl-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tl-header {
+      margin-bottom: 10px;
+    }
+
+    .tl-week {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .tl-date {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .tl-card {
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      flex: 1;
+      border-left: 3px solid transparent;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .tl-card:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tl-card ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .tl-card ul li {
+      font-size: 12px;
+      line-height: 1.7;
+      padding: 2px 0;
+      padding-left: 16px;
+      position: relative;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .tl-card ul li::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 10px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: currentColor;
+      opacity: 0.4;
+    }
+
+    .col-blue .tl-week { color: #2563eb; }
+    .col-blue .tl-card { background: #eff6ff; border-color: #3b82f6; }
+
+    .col-green .tl-week { color: #16a34a; }
+    .col-green .tl-card { background: #f0fdf4; border-color: #22c55e; }
+
+    .col-now .tl-week { color: #16a34a; }
+    .col-now .tl-card { background: #f0fdf4; border-color: #16a34a; box-shadow: 0 0 0 1px rgba(22,163,74,0.08); }
+    .col-now .tl-week::after {
+      content: " ";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a;
+      margin-left: 6px;
+      vertical-align: middle;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(22,163,74,0.3); } 50% { opacity: 0.4; box-shadow: 0 0 0 6px rgba(22,163,74,0); } }
+
+    .col-future .tl-week { color: #ea580c; }
+    .col-future .tl-card { background: #fff7ed; border-color: #f97316; border-left-style: dashed; }
+
+    /* ─── STAIRCASE ─── */
+    .staircase-wrap {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      height: 360px;
+      padding-bottom: 0;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 14px;
+    }
+
+    .stair-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-end;
+      height: 100%;
+    }
+
+    .stair-bar {
+      border-radius: 10px 10px 0 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 10px;
+      color: #fff;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .stair-bar:hover {
+      transform: scaleY(1.02);
+      transform-origin: bottom;
+    }
+
+    .stair-bar-label {
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stair-bar-detail {
+      font-size: 11px;
+      opacity: 0.85;
+      line-height: 1.5;
+      font-weight: 500;
+    }
+
+    .stair-x-label {
+      display: flex;
+      gap: 16px;
+      margin-top: 12px;
+    }
+
+    .stair-x-item {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ─── KPI DASHBOARD ─── */
+    .kpi-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+    }
+
+    .kpi-table thead th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 0 14px 12px;
+      text-align: left;
+    }
+
+    .kpi-table thead th:nth-child(2) { text-align: center; }
+    .kpi-table thead th:last-child { text-align: right; }
+
+    .kpi-row td {
+      padding: 12px 14px;
+      background: var(--card-inner);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s ease;
+    }
+
+    .kpi-row:hover td {
+      background: #f1f5f9;
+    }
+
+    .kpi-row td:first-child {
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+      border-left: 1px solid var(--border);
+    }
+
+    .kpi-row td:last-child {
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      border-right: 1px solid var(--border);
+      text-align: right;
+    }
+
+    .kpi-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .kpi-bar-wrap {
+      position: relative;
+      height: 30px;
+      background: var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .kpi-bar-fill {
+      height: 100%;
+      border-radius: 8px;
+      transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 0;
+    }
+
+    .kpi-bar-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .kpi-bar-text.light { color: #fff; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .badge-done     { background: #dcfce7; color: #16a34a; }
+    .badge-progress { background: #fff7ed; color: #ea580c; }
+    .badge-track    { background: #eff6ff; color: #2563eb; }
+    .badge-none     { background: #f3f4f6; color: #9ca3af; }
+
+    /* ─── ACTIVITY SECTION ─── */
+    .activity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+
+    .activity-block {
+      background: var(--card-inner);
+      border-radius: var(--radius-sm);
+      padding: 22px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .activity-block:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .activity-block-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .activity-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 13px;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-item-label {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .activity-item-value {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .activity-item-value.green { color: var(--green); }
+    .activity-item-value.blue  { color: var(--blue); }
+    .activity-item-value.orange { color: var(--orange); }
+    .activity-item-value.purple { color: var(--purple); }
+
+    /* ─── EFFORT TABLE ─── */
+    .effort-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 6px;
+    }
+
+    .effort-table th {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding: 0 14px 12px;
+      text-align: left;
+    }
+
+    .effort-table th:last-child { text-align: right; }
+
+    .effort-row td {
+      padding: 12px 14px;
+      background: var(--card-inner);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      transition: background 0.15s ease;
+    }
+
+    .effort-row:hover td {
+      background: #f1f5f9;
+    }
+
+    .effort-row td:first-child {
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+      border-left: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .effort-row td:last-child {
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      border-right: 1px solid var(--border);
+      text-align: right;
+      font-weight: 700;
+      color: var(--blue);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .effort-row td:nth-child(2) {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .effort-total td {
+      padding: 14px 14px;
+      background: var(--blue-light);
+      border-top: 2px solid #bfdbfe;
+      border-bottom: 2px solid #bfdbfe;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .effort-total td:first-child {
+      border-radius: var(--radius-sm) 0 0 var(--radius-sm);
+      border-left: 2px solid #bfdbfe;
+      color: var(--blue);
+    }
+
+    .effort-total td:last-child {
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      border-right: 2px solid #bfdbfe;
+      text-align: right;
+      color: var(--blue);
+    }
+
+    .note-strip {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: 12px;
+      font-style: italic;
+      font-weight: 500;
+    }
+
+    /* ─── SITE NAV ─── */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      height: 56px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 8px 24px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      padding: 0 32px;
+    }
+
+    .snav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .snav-brand-name {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #64748b;
+    }
+
+    .snav-brand-name span {
+      color: #e2e8f0;
+    }
+
+    .snav-day {
+      font-size: 10px;
+      font-weight: 600;
+      color: #94a3b8;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid #334155;
+      border-radius: 999px;
+      padding: 3px 10px;
+    }
+
+    .snav-tabs {
+      display: flex;
+      align-items: stretch;
+      height: 100%;
+      margin-left: 28px;
+    }
+
+    .snav-tab {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0 18px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748b;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .snav-tab:hover {
+      color: #cbd5e1;
+      border-bottom-color: #334155;
+    }
+
+    .snav-tab.active {
+      color: #f8fafc;
+      border-bottom-color: var(--blue);
+    }
+
+    .snav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .snav-ext-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+    }
+
+    .snav-divider {
+      width: 1px;
+      height: 20px;
+      background: #1e293b;
+      margin: 0 6px;
+    }
+
+    .snav-ext {
+      font-size: 11px;
+      font-weight: 500;
+      color: #475569;
+      text-decoration: none;
+      padding: 5px 10px;
+      border-radius: 6px;
+      transition: color 0.15s, background 0.15s;
+    }
+
+    .snav-ext:hover {
+      color: #cbd5e1;
+      background: rgba(30, 41, 59, 0.6);
+    }
+
+    .snav-live {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      color: #22c55e;
+      background: rgba(34,197,94,0.08);
+      border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      margin-left: 8px;
+      transition: background 0.15s;
+    }
+
+    .snav-live:hover {
+      background: rgba(34,197,94,0.15);
+    }
+
+    .snav-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      animation: snav-pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes snav-pulse {
+      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(34,197,94,0.4); }
+      50% { opacity: 0.4; box-shadow: 0 0 0 4px rgba(34,197,94,0); }
+    }
+
+    /* ─── WORK BOARD (from Work Canvas) ─── */
+    .board-legend {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 22px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+      flex-wrap: wrap;
+    }
+    .board-legend .lg {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .board-legend .lg-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .board-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .zone {
+      border-radius: var(--radius-sm);
+      border: 1.5px dashed;
+      padding: 16px 16px 18px;
+    }
+
+    .zone-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .zone-sublabel {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      background: rgba(0,0,0,0.05);
+      padding: 2px 7px;
+      border-radius: 4px;
+      opacity: 0.75;
+    }
+
+    .zone-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .zone-green  { background: #f0fdf4; border-color: #86efac; }
+    .zone-green  .zone-label { color: #15803d; }
+    .zone-blue   { background: #eff6ff; border-color: #93c5fd; }
+    .zone-blue   .zone-label { color: #1d4ed8; }
+    .zone-teal   { background: #f0fdfa; border-color: #99f6e4; }
+    .zone-teal   .zone-label { color: #0f766e; }
+    .zone-purple { background: #faf5ff; border-color: #d8b4fe; }
+    .zone-purple .zone-label { color: #7c3aed; }
+    .zone-orange { background: #fff7ed; border-color: #fed7aa; }
+    .zone-orange .zone-label { color: #c2410c; }
+    .zone-indigo { background: #eef2ff; border-color: #c7d2fe; }
+    .zone-indigo .zone-label { color: #4338ca; }
+    .zone-yellow { background: #fffbeb; border-color: #fde68a; }
+    .zone-yellow .zone-label { color: #b45309; }
+
+    .zone-span-2 { grid-column: span 2; }
+    .zone-span-3 { grid-column: 1 / -1; }
+    .zone-span-3 .zone-cards {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+    .zone-span-3 .card { width: 200px; }
+
+    .card {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      padding: 10px 12px 10px 10px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      border-left-width: 4px;
+      transition: box-shadow 0.15s ease;
+    }
+
+    .card:hover { box-shadow: var(--shadow-md); }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.35;
+      padding-right: 16px;
+    }
+
+    .card-sub {
+      font-size: 10px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+      line-height: 1.45;
+    }
+
+    .status-dot {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .card-green  { border-left-color: #22c55e; }
+    .card-blue   { border-left-color: #3b82f6; }
+    .card-teal   { border-left-color: #14b8a6; }
+    .card-purple { border-left-color: #a855f7; }
+    .card-orange { border-left-color: #f97316; }
+    .card-indigo { border-left-color: #6366f1; }
+    .card-yellow { border-left-color: #f59e0b; }
+
+    .dot-green  { background: #22c55e; }
+    .dot-orange { background: #f97316; }
+    .dot-blue   { background: #3b82f6; }
+    .dot-purple { background: #a855f7; }
+
+    /* ─── INITIATIVES (from Build Log) ─── */
+    .initiatives-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+    .init-card {
+      background: var(--card-inner);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 20px 22px 18px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .init-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .init-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .init-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.1px;
+    }
+    .init-range {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .init-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 14px; }
+    .init-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+    .init-tag {
+      font-size: 9px;
+      padding: 2px 8px;
+      border-radius: 8px;
+      background: #f3f4f6;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      letter-spacing: 0.02em;
+    }
+    .init-tag.live  { color: var(--green);  border-color: #bbf7d0; background: var(--green-light); }
+    .init-tag.fresh { color: var(--orange); border-color: #fed7aa; background: var(--orange-light); }
+    .init-list {
+      list-style: none;
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+    }
+    .init-list li {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      padding: 4px 0 4px 16px;
+      position: relative;
+      line-height: 1.55;
+    }
+    .init-list li::before {
+      content: '·';
+      position: absolute;
+      left: 4px;
+      color: var(--blue);
+      font-size: 18px;
+      line-height: 0.95;
+    }
+    .init-list li strong { color: var(--text-primary); font-weight: 600; }
+    .init-list li code, .init-desc code {
+      font-size: 10.5px;
+      background: #eef0f2;
+      padding: 1px 4px;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    /* ─── BUILD-LOG TIMELINE ─── */
+    .buildlog-wrap {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--card-inner);
+    }
+    .buildlog-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+    }
+    .buildlog-toolbar .bl-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .bl-btn {
+      background: var(--blue-light);
+      border: 1px solid #bfdbfe;
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+    }
+    .bl-btn:hover { background: #dbeafe; }
+    .buildlog {
+      max-height: 560px;
+      overflow-y: auto;
+      padding: 4px 0;
+    }
+    .buildlog.expanded { max-height: none; }
+    .day-block {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      padding: 13px 18px;
+      border-bottom: 1px solid var(--border);
+      gap: 18px;
+    }
+    .day-block:last-child { border-bottom: none; }
+    .day-meta { display: flex; flex-direction: column; gap: 4px; }
+    .day-date { font-size: 12px; font-weight: 700; color: var(--text-primary); letter-spacing: 0.02em; }
+    .day-num { font-size: 10px; color: var(--text-muted); font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+    .day-count {
+      font-size: 9px;
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      background: var(--blue-light);
+      border: 1px solid #bfdbfe;
+      padding: 2px 8px;
+      border-radius: 999px;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+    .day-items { display: flex; flex-direction: column; gap: 5px; }
+    .day-item {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      display: flex;
+      gap: 8px;
+    }
+    .day-item .di-prefix {
+      color: var(--blue);
+      font-weight: 700;
+      flex-shrink: 0;
+      font-size: 10px;
+      background: var(--blue-light);
+      border: 1px solid #bfdbfe;
+      padding: 1px 7px;
+      border-radius: 6px;
+      height: 18px;
+      align-self: flex-start;
+      margin-top: 2px;
+      letter-spacing: 0.02em;
+    }
+    .day-item .di-prefix.feat { color: var(--green); border-color: #bbf7d0; background: var(--green-light); }
+    .day-item .di-prefix.fix  { color: var(--orange); border-color: #fed7aa; background: var(--orange-light); }
+    .day-item .di-prefix.chore, .day-item .di-prefix.refactor, .day-item .di-prefix.docs, .day-item .di-prefix.test, .day-item .di-prefix.ci { color: var(--text-muted); background: #f3f4f6; border-color: var(--border); }
+    .day-item .di-prefix.ux, .day-item .di-prefix.security { color: var(--purple); border-color: #ddd6fe; background: var(--purple-light); }
+    .day-item .di-text { flex: 1; }
+    .day-item .di-text strong { color: var(--text-primary); font-weight: 600; }
+    .day-item .di-text code {
+      font-size: 10.5px;
+      background: #eef0f2;
+      padding: 1px 4px;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+    .buildlog::-webkit-scrollbar { width: 6px; }
+    .buildlog::-webkit-scrollbar-track { background: transparent; }
+    .buildlog::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 6px; }
+
+    /* ─── IN FLIGHT ─── */
+    .inflight-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .inflight-card {
+      background: var(--orange-light);
+      border: 1px solid #fed7aa;
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+    }
+    .inflight-card.judgment {
+      background: var(--purple-light);
+      border-color: #ddd6fe;
+    }
+    .if-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--orange); margin-bottom: 8px; }
+    .judgment .if-label { color: var(--purple); }
+    .if-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--text-primary); }
+    .if-detail { font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+    .if-detail code {
+      font-size: 10.5px;
+      background: #eef0f2;
+      padding: 1px 4px;
+      border-radius: 4px;
+      color: var(--text-primary);
+    }
+
+    /* ─── FOOTER ─── */
+    .page-footer {
+      text-align: center;
+      padding: 40px 0 0;
+      color: var(--text-muted);
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 1100px) {
+      .stats-row { grid-template-columns: repeat(3, 1fr); }
+      .timeline-columns { grid-template-columns: repeat(4, 1fr); }
+      .board-grid { grid-template-columns: repeat(2, 1fr); }
+      .zone-span-2, .zone-span-3 { grid-column: 1 / -1; }
+      .initiatives-grid { grid-template-columns: 1fr; }
+      .inflight-grid { grid-template-columns: 1fr; }
+      .activity-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .page-container { padding: 24px 16px 60px; }
+      .section { padding: 22px; }
+      .stats-row { grid-template-columns: repeat(2, 1fr); }
+      .timeline-columns { grid-template-columns: 1fr 1fr; }
+      .board-grid { grid-template-columns: 1fr; }
+      .staircase-wrap { height: 280px; }
+      .day-block { grid-template-columns: 1fr; gap: 8px; }
+      .day-meta { flex-direction: row; align-items: center; gap: 10px; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div class="snav-brand">
+      <span class="snav-brand-name">Trilogy Care &nbsp;&middot;&nbsp; <span>AI Innovations</span></span>
+      <span class="snav-day">Day 62 of 90</span>
+    </div>
+    <div class="snav-tabs">
+      <a class="snav-tab active" href="progress.html"><span class="snav-dot" style="background:#22c55e;"></span> Progress</a>
+      <a class="snav-tab" href="index.html"><span class="snav-dot" style="background:#94a3b8;"></span> AI Integration Plan</a>
+      <a class="snav-tab" href="agedcare-compare.html"><span class="snav-dot" style="background:#f97316;"></span> AgedCare Compare</a>
+      <a class="snav-tab" href="seo-strategy.html"><span class="snav-dot" style="background:#54a0ff;"></span> SEO Strategy</a>
+      <a class="snav-tab" href="jarvis.html"><span class="snav-dot" style="background:#e74c3c;"></span> JARVIS</a>
+      <a class="snav-tab" href="partners-hub.html"><span class="snav-dot" style="background:#00cec9;"></span> Partners Hub</a>
+      <a class="snav-tab" href="agent-intelligence.html"><span class="snav-dot" style="background:#f59e0b;"></span> Agent Intelligence</a>
+    </div>
+    <div class="snav-ext-links">
+      <div class="snav-divider"></div>
+      <a class="snav-ext" href="https://app.asana.com/0/1211908105374551/list" target="_blank">Asana</a>
+      <a class="snav-ext" href="https://trilogy-dash-3zgz7xkb.manus.space/csuite" target="_blank">Manus</a>
+      <a class="snav-ext" href="https://linear.app" target="_blank">Linear</a>
+      <a class="snav-live" href="https://ai-roadmap-gilt.vercel.app" target="_blank"><span class="snav-live-dot"></span> Live</a>
+    </div>
+  </nav>
+
+  <div class="page-container">
+
+  <div class="page-header reveal">
+    <p class="page-title">Trilogy Care &middot; AI Innovations</p>
+    <h1 class="page-heading">Progress</h1>
+    <p class="page-sub">Imran Mehmood &middot; Day 62 of 90 &middot; Started 4 March 2026 &middot; Last updated 22 May 2026 &middot; Week-by-week timeline, the work board, and the full GROW build log in one place.</p>
+  </div>
+
+  <!-- ════════ SUMMARY STATS ════════ -->
+  <!-- SUMMARY STATS ROW 1: OUTPUTS -->
+  <div class="stats-row reveal">
+    <div class="stat-card" style="--accent-color:#2563eb">
+      <div class="stat-num" style="color:#2563eb" data-count="109">0</div>
+      <div class="stat-label">AI opportunities scoped</div>
+      <div class="stat-sub">Marketing, Sales, BD</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#16a34a">
+      <div class="stat-num" style="color:#16a34a">18+</div>
+      <div class="stat-label">SKILL.md files written</div>
+      <div class="stat-sub">6 team members handed off</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#16a34a">
+      <div class="stat-num" style="color:#16a34a" data-count="22">0</div>
+      <div class="stat-label">Live workstreams shipped</div>
+      <div class="stat-sub">16+ tools live in the GROW platform</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#7c3aed">
+      <div class="stat-num" style="color:#7c3aed">20+</div>
+      <div class="stat-label">Stakeholders engaged</div>
+      <div class="stat-sub">Marketing, Sales, BD, Ops, Care</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#ea580c">
+      <div class="stat-num" style="color:#ea580c" data-count="8">0</div>
+      <div class="stat-label">MCPs connected</div>
+      <div class="stat-sub">Asana, M365, Databricks, Fireflies, Figma, Canva, Linear, Vercel</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY STATS ROW 2: ACTIVITY -->
+  <div class="stats-row reveal" style="margin-bottom: 32px;">
+    <div class="stat-card" style="--accent-color:#0ea5e9">
+      <div class="stat-num" style="color:#0ea5e9">60+</div>
+      <div class="stat-label">Sessions held</div>
+      <div class="stat-sub">Discovery, 1:1s, scoping, comms hub, Ash deep-dive</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#16a34a">
+      <div class="stat-num" style="color:#16a34a">387</div>
+      <div class="stat-label">GROW PRs merged</div>
+      <div class="stat-sub">Plus 85 TCPW feature PRs</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#f59e0b">
+      <div class="stat-num" style="color:#f59e0b">16</div>
+      <div class="stat-label">Live tools shipped</div>
+      <div class="stat-sub">10-automations KPI: done (160%)</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#6366f1">
+      <div class="stat-num" style="color:#6366f1">~270h</div>
+      <div class="stat-label">Estimated hours invested</div>
+      <div class="stat-sub">In 62 days (Week 12)</div>
+    </div>
+    <div class="stat-card" style="--accent-color:#ec4899">
+      <div class="stat-num" style="color:#ec4899">$19.5k</div>
+      <div class="stat-label">Annual savings identified</div>
+      <div class="stat-sub">Tracksuit via Brand Intelligence</div>
+    </div>
+  </div>
+
+  <!-- ════════ SECTION 1: WEEK-BY-WEEK TIMELINE ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#2563eb">Timeline</div>
+    <div class="section-title">Week by Week</div>
+    <div class="section-desc">What was shipped in each phase, and what's coming next</div>
+
+    <div class="timeline-spine">
+      <div class="timeline-spine-fill" style="width:92%;"></div>
+      <div class="timeline-dot" style="left:6%; background:#93c5fd;"></div>
+      <div class="timeline-dot" style="left:14%; background:#3b82f6;"></div>
+      <div class="timeline-dot" style="left:22%; background:#22c55e;"></div>
+      <div class="timeline-dot" style="left:31%; background:#22c55e;"></div>
+      <div class="timeline-dot" style="left:39%; background:#16a34a;"></div>
+      <div class="timeline-dot" style="left:48%; background:#16a34a;"></div>
+      <div class="timeline-dot" style="left:56%; background:#16a34a;"></div>
+      <div class="timeline-dot" style="left:64%; background:#16a34a;"></div>
+      <div class="timeline-dot" style="left:73%; background:#16a34a;"></div>
+      <div class="timeline-dot" style="left:81%; background:#16a34a;"></div>
+      <div class="timeline-dot" style="left:92%; background:#16a34a; box-shadow: 0 0 0 4px rgba(22,163,74,0.2);"></div>
+      <div class="timeline-dot" style="left:97%; background:#f97316; border-style: dashed;"></div>
+    </div>
+
+    <div class="timeline-columns">
+      <div class="tl-col col-blue">
+        <div class="tl-header">
+          <div class="tl-week">Week 1</div>
+          <div class="tl-date">4-7 Mar</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>EA workspace built</li>
+            <li>Nick 1:1 cadence set</li>
+            <li>90-day plan drafted</li>
+            <li>Leadership intros</li>
+            <li>1 MCP connected</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-blue">
+        <div class="tl-header">
+          <div class="tl-week">Week 2</div>
+          <div class="tl-date">10-14 Mar</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>109-item AI registry</li>
+            <li>Brand Intel prototype</li>
+            <li>M365 MCP connected</li>
+            <li>7 persona guides</li>
+            <li>3 agent specs</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 3</div>
+          <div class="tl-date">17-21 Mar</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>6 marketing skills live</li>
+            <li>2 automations shipped</li>
+            <li>21 tools audited</li>
+            <li>Databricks + Figma</li>
+            <li>13+ stakeholders</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 4</div>
+          <div class="tl-date">24-28 Mar</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>Linear replacing Asana</li>
+            <li>Nick restructure aligned</li>
+            <li>AgedCare Compare review</li>
+            <li>Marketing challenge launched</li>
+            <li>KPI framework defined</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 5</div>
+          <div class="tl-date">31 Mar-4 Apr</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>Grow platform: 11 tools</li>
+            <li>ORM tool specced</li>
+            <li>Voice-to-Brief specced</li>
+            <li>Comms hub 7 sessions</li>
+            <li>PPC concepts for Luke</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 6</div>
+          <div class="tl-date">7-11 Apr</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>15 tools live (KPI done)</li>
+            <li>Deploy pipeline fixed</li>
+            <li>Linear agent board live</li>
+            <li>Canva batch agent built</li>
+            <li>Comms intake in Grow</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 7</div>
+          <div class="tl-date">14-20 Apr</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>45 commits, 23,076 lines across 3 repos (3.8x AI multiplier)</li>
+            <li>15 features shipped to Grow (UTM redesign, Content Calendar, Brand Profiles, Market Sentiment Index, IAT x2, Comms gate, Partner Collateral, Agent Map)</li>
+            <li>JARVIS personal intelligence live (8 crons, admin dashboard, design evaluator)</li>
+            <li>6-competitor deep-dive for AgedCare Compare (24k words, gap analysis)</li>
+            <li>Marketing compliance audit: 29 findings (4 critical) across 6 systems</li>
+            <li>Caring Co replacement campaign scoped ($50k LinkedIn BD acquisition)</li>
+            <li>Partners Hub scoped (public partner portal)</li>
+            <li>Security fix: all AI calls moved server-side in Grow</li>
+            <li>AgedCare Compare: 17,483 suburbs done, competitor gap strategy written</li>
+            <li>Ash session: agent architecture aligned, agentic SOPs methodology</li>
+            <li>16 tools live in Grow (160% of KPI)</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 8</div>
+          <div class="tl-date">21-25 Apr</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>Grow app deployed to production -- 9 pages + JARVIS dashboard unblocked</li>
+            <li>Linear board triage; Brand Bible v2 injected into all agents</li>
+            <li>Agent prompt upgrades (B+ to A); first self-improving agent audit</li>
+            <li>ORM tool built; Steve briefed on compliance audit</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 9-10</div>
+          <div class="tl-date">28 Apr-9 May</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>GROW UX overhaul -- IA pass, home redesign, design-token sweep</li>
+            <li>Mission Control v0.1-v0.4 -- editable agent prompts + audit log</li>
+            <li>Paid Ads v1/v1.5 -- Meta + Google Snapshot via Databricks</li>
+            <li>Sales Playbook + Coordinator Lookup live; Agent House view</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-green">
+        <div class="tl-header">
+          <div class="tl-week">Week 11</div>
+          <div class="tl-date">12-16 May</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li>BD Proposal Studio -- 12-phase build, Nick's decks ported</li>
+            <li>Marketing Intelligence -- cross-source page wired to live data</li>
+            <li>Copywriter -- 7-call AI review + detection + humanizer</li>
+            <li>Call Quality Portal Phases 1-3 started</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-col col-now">
+        <div class="tl-header">
+          <div class="tl-week">Week 12</div>
+          <div class="tl-date">19-23 May</div>
+        </div>
+        <div class="tl-card">
+          <ul>
+            <li><strong>Call Quality Portal Phases 3-5 delivered front-to-back</strong> -- ~20 PRs, AI-scored review + coaching + Teams delivery</li>
+            <li>ORM Escalation v2; Seek + Glassdoor reply platforms</li>
+            <li>Paid Ads GHA Databricks sync + KPI pre-compute + caching</li>
+            <li>LLM architecture hardened -- typed wrappers, observability, bypass cleanup</li>
+            <li>TCPW reCAPTCHA outage found + fixed (site-wide lead capture restored)</li>
+            <li>coordination-payments tool built (305 coordinators)</li>
+            <li>~170 distinct changes shipped across 4 codebases in 7 days</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ GROWTH STAIRCASE ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#16a34a">Output</div>
+    <div class="section-title">Growth Staircase</div>
+    <div class="section-desc">Cumulative output volume building week over week - dashed bar shows 90-day target</div>
+
+    <div class="staircase-wrap">
+      <div class="stair-col">
+        <div class="stair-bar" style="height:11%; background:#93c5fd;">
+          <div class="stair-bar-label" style="color:#1e3a5f">Week 1</div>
+          <div class="stair-bar-detail" style="color:#1e3a5f">Setup<br>4 outputs</div>
+        </div>
+      </div>
+      <div class="stair-col">
+        <div class="stair-bar" style="height:24%; background:#3b82f6;">
+          <div class="stair-bar-label">Week 2</div>
+          <div class="stair-bar-detail">Discovery<br>+6 items<br>10 total</div>
+        </div>
+      </div>
+      <div class="stair-col">
+        <div class="stair-bar" style="height:46%; background:#16a34a;">
+          <div class="stair-bar-label">Week 3</div>
+          <div class="stair-bar-detail">Build Phase<br>+8 items<br>18+ total</div>
+        </div>
+      </div>
+      <div class="stair-col">
+        <div class="stair-bar" style="height:72%; background:#22c55e;">
+          <div class="stair-bar-label">Wks 4-7</div>
+          <div class="stair-bar-detail">Day 49<br>16 tools + JARVIS<br>KPI #1 done (160%)<br>23k lines, 20 docs</div>
+        </div>
+      </div>
+      <div class="stair-col">
+        <div class="stair-bar" style="height:96%; background:#16a34a;">
+          <div class="stair-bar-label">Wks 8-12</div>
+          <div class="stair-bar-detail">Day 62<br>22 workstreams<br>387 PRs merged<br>Call Quality, BD<br>Proposals, Paid Ads</div>
+        </div>
+      </div>
+      <div class="stair-col">
+        <div class="stair-bar" style="height:100%; background: repeating-linear-gradient(45deg, #fed7aa, #fed7aa 6px, #fff7ed 6px, #fff7ed 12px); border: 2px dashed #f97316; border-bottom: none;">
+          <div class="stair-bar-label" style="color:#c2410c">Target</div>
+          <div class="stair-bar-detail" style="color:#c2410c">90 Days<br>10 autos<br>10+ skills<br>All KPIs met</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stair-x-label">
+      <div class="stair-x-item">Week 1<br>4-7 Mar</div>
+      <div class="stair-x-item">Week 2<br>10-14 Mar</div>
+      <div class="stair-x-item">Week 3<br>17-21 Mar</div>
+      <div class="stair-x-item">Wks 4-7<br>Day 49 &middot; 21 Apr</div>
+      <div class="stair-x-item">Wks 8-12<br>Day 62 &middot; 22 May</div>
+      <div class="stair-x-item" style="color:#ea580c">Target<br>90 Days<br><span style="font-size:10px;">~28 days remaining</span></div>
+    </div>
+  </div>
+
+  <!-- ════════ 90-DAY KPI DASHBOARD ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#7c3aed">KPIs</div>
+    <div class="section-title">90-Day KPI Dashboard</div>
+    <div class="section-desc">Progress against each success metric as of Day 62</div>
+
+    <table class="kpi-table">
+      <thead>
+        <tr>
+          <th style="width:220px">KPI</th>
+          <th>Progress</th>
+          <th style="width:130px">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">AI Opportunity Audit</div>
+            <div class="kpi-sub">All 3 functions covered</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#16a34a;" data-width="100%"></div>
+              <div class="kpi-bar-text light">Done - 109 items scoped across Marketing, Sales, BD</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-done">Done</span></td>
+        </tr>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">10 Live Automations</div>
+            <div class="kpi-sub">22 workstreams in Grow platform</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#16a34a;" data-width="100%"></div>
+              <div class="kpi-bar-text light">22 / 10 live (220%) - the original 16 plus Call Quality Portal, BD Proposal Studio, Paid Ads, Marketing Intelligence, Mission Control, Copywriter / Writer, and ORM Escalation</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-done">Done</span></td>
+        </tr>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">AI Training + Guidance</div>
+            <div class="kpi-sub">6 of 9 marketing done</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#86efac;" data-width="67%"></div>
+              <div class="kpi-bar-text">6 of 9 marketing done - Miranda, Maria, Steve + Sales/BD pipeline</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-progress">In Progress</span></td>
+        </tr>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">AI Tool Audit</div>
+            <div class="kpi-sub">SaaS done, stack pending</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#86efac;" data-width="70%"></div>
+              <div class="kpi-bar-text">21 tools audited - stack recommendation pending Steve/Nick review</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-progress">In Progress</span></td>
+        </tr>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">Baseline AI Confidence</div>
+            <div class="kpi-sub">Not started yet</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#d1d5db;" data-width="0%"></div>
+              <div class="kpi-bar-text" style="color:#9ca3af">Not started - targeted for Month 2</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-none">Not Started</span></td>
+        </tr>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">Stakeholder Relationships</div>
+            <div class="kpi-sub">Marketing + BD strong</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#16a34a;" data-width="80%"></div>
+              <div class="kpi-bar-text light">Strong across Marketing + BD - Sales started, Comms Hub pulling in Ops/Care</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-track">On Track</span></td>
+        </tr>
+        <tr class="kpi-row">
+          <td>
+            <div class="kpi-name">Team Skills Rollout</div>
+            <div class="kpi-sub">6 marketing done, pipeline open</div>
+          </td>
+          <td>
+            <div class="kpi-bar-wrap">
+              <div class="kpi-bar-fill" style="background:#86efac;" data-width="55%"></div>
+              <div class="kpi-bar-text">6 / ~11 marketing done - Miranda, Maria, Steve + Sales/BD to come</div>
+            </div>
+          </td>
+          <td><span class="status-badge badge-progress">In Progress</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ════════ SECTION 2: WORK BOARD ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#a855f7">Work Board</div>
+    <div class="section-title">Where the Work Sits</div>
+    <div class="section-desc">Every workstream on one board - shipped, active, blocked, and newly surfaced - as of 22 May 2026</div>
+
+    <div class="board-legend">
+      <div class="lg"><span class="lg-dot dot-blue"></span> Done</div>
+      <div class="lg"><span class="lg-dot dot-green"></span> Active</div>
+      <div class="lg"><span class="lg-dot dot-orange"></span> Blocked</div>
+      <div class="lg"><span class="lg-dot dot-purple"></span> Newly surfaced</div>
+    </div>
+
+    <div class="board-grid">
+
+      <!-- SHIPPED / DONE -->
+      <div class="zone zone-green zone-span-3">
+        <div class="zone-label">Shipped / Done <span class="zone-sublabel">31 items</span></div>
+        <div class="zone-cards">
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">AI Opportunity Registry</div><div class="card-sub">109 items, all 3 functions</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">SaaS Audit</div><div class="card-sub">21 tools documented</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Brand Intelligence Prototype</div><div class="card-sub">Tracksuit replacement, $19.5k/yr saving</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Delegation Tracker (Mariia)</div><div class="card-sub">Live Asana MCP</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Alicia Headshot Processor</div><div class="card-sub">Python, live and in use</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Trilogy Headshot Processor</div><div class="card-sub">Face detect, crop, Outlook draft</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Ray Skills</div><div class="card-sub">3 skills + handoff</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Alicia Skills</div><div class="card-sub">5 skills + handoff</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Mariia Skills</div><div class="card-sub">4 skills + handoff</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Matt Skills</div><div class="card-sub">3 skills + handoff</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Paul Skills</div><div class="card-sub">3 skills + handoff</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Mike Coffey Skills</div><div class="card-sub">3 skills + handoff</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">SKILLS-FAQ</div><div class="card-sub">Team-wide reference</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">AI Integration Plan</div><div class="card-sub">v1 roadmap HTML</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Week 1-3 Summaries to Nick</div><div class="card-sub">All delivered on schedule</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Miranda Discovery</div><div class="card-sub">Session done 31 March</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">GM Alignment Session</div><div class="card-sub">Completed</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">AI Strat + KPIs Session</div><div class="card-sub">1 April</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">GROW Platform</div><div class="card-sub">Live -- 387 PRs merged, 22 workstreams</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Call Quality Portal</div><div class="card-sub">Live -- Phases 1-5, AI-scored review + Teams coaching</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">BD Proposal Studio</div><div class="card-sub">Live -- Nick's decks, PDF/PPTX export, in-editor AI</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Paid Ads Snapshot</div><div class="card-sub">Live -- Meta + Google via Databricks, daily LLM read</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Marketing Intelligence</div><div class="card-sub">Live -- cross-source funnel, attribution, forecast</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Mission Control</div><div class="card-sub">Live -- editable agent prompts + audit log</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Copywriter + Writer</div><div class="card-sub">Live -- AI review, detection, humanizer</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">ORM Escalation v2</div><div class="card-sub">Live -- procedure-complete intake + employer route</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Sales Hub Cockpit</div><div class="card-sub">Live -- Sales boards + shared RelatedTools strip</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">JARVIS / Pulse</div><div class="card-sub">Live -- platform health + agent monitoring</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">TCPW reCAPTCHA Fix</div><div class="card-sub">Site-wide lead capture restored on homecareprices.com.au</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Coordination Payments</div><div class="card-sub">Live -- monthly RCTI + statement mailer (305 coordinators)</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Elias Automation System</div><div class="card-sub">Live -- Telegram bridge + approval queue</div></div>
+        </div>
+      </div>
+
+      <!-- MARKETING ACTIVE -->
+      <div class="zone zone-blue">
+        <div class="zone-label">Marketing Active <span class="zone-sublabel">10 items</span></div>
+        <div class="zone-cards">
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Marketing AI KPI Framework</div><div class="card-sub">Drafting ahead of Nick's 26 May return</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Marketing Org Structure Visual</div><div class="card-sub">In progress -- folds into the KPI framework hand-back</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Linear Migration</div><div class="card-sub">Access granted, board being built</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Miranda Skills</div><div class="card-sub">Discovery done, skills to build next</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Steve Session</div><div class="card-sub">Skills TBD -- session needed first</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Matt Session</div><div class="card-sub">Content agent, SEO-driven</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Ray Session</div><div class="card-sub">Paid media process + daily snapshot</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Paul Session</div><div class="card-sub">PMAX/attribution gap + agent extension</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Mike Coffey Session</div><div class="card-sub">Articulate Klaviyo use cases</div></div>
+          <div class="card card-blue"><div class="status-dot dot-green"></div><div class="card-title">Source Docs Collection</div><div class="card-sub">Brand tone, social tone, SEO process, email tone</div></div>
+        </div>
+      </div>
+
+      <!-- AGEDCARE COMPARE -->
+      <div class="zone zone-teal">
+        <div class="zone-label">AgedCare Compare <span class="zone-sublabel">7 items</span></div>
+        <div class="zone-cards">
+          <div class="card card-teal"><div class="status-dot dot-green"></div><div class="card-title">3 New Design Prototypes</div><div class="card-sub">Softer colours, real imagery, big CTA. Mobile first.</div></div>
+          <div class="card card-teal"><div class="status-dot dot-green"></div><div class="card-title">Competitor Research</div><div class="card-sub">Compare Club, Caring.co, Downsizing.com.au</div></div>
+          <div class="card card-teal"><div class="status-dot dot-green"></div><div class="card-title">Vibe Coding</div><div class="card-sub">Imran prompts, Nick design direction</div></div>
+          <div class="card card-teal"><div class="status-dot dot-orange"></div><div class="card-title">Nick's Correspondence Pack</div><div class="card-sub">Read brief + background -- not yet done</div></div>
+          <div class="card card-teal"><div class="status-dot dot-orange"></div><div class="card-title">Luke Design Meeting</div><div class="card-sub">Blocked -- waiting on Nick calendar</div></div>
+          <div class="card card-teal"><div class="status-dot dot-green"></div><div class="card-title">Calculator Strategy</div><div class="card-sub">Luke wants press-buttons, easy compare flow</div></div>
+          <div class="card card-teal"><div class="status-dot dot-purple"></div><div class="card-title">Legal / Aaron</div><div class="card-sub">Powered by Trilogy branding -- no formal action yet</div></div>
+        </div>
+      </div>
+
+      <!-- COMMS HUB -->
+      <div class="zone zone-purple">
+        <div class="zone-label">Comms Hub <span class="zone-sublabel">11 items</span></div>
+        <div class="zone-cards">
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">7 Scoping Sessions</div><div class="card-sub">Thu 9 + Fri 10 April -- 6 business units</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Romy Blacklaw</div><div class="card-sub">Care -- Innovation + Transformation Lead</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Leslie Nelson</div><div class="card-sub">Operations Manager</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Candice Murphy</div><div class="card-sub">Client Services Manager</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Tiffany Whitelaw</div><div class="card-sub">SAH / Care</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Megan + Sophie</div><div class="card-sub">Quality / Ops -- covering Zoe</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Nadia Rivkaris</div><div class="card-sub">Partnerships Liaison</div></div>
+          <div class="card card-purple"><div class="status-dot dot-green"></div><div class="card-title">Katja Session</div><div class="card-sub">Data + AI scoping</div></div>
+          <div class="card card-purple"><div class="status-dot dot-purple"></div><div class="card-title">ESP Decision</div><div class="card-sub">Consumer IO vs ActiveCampaign -- no owner yet</div></div>
+          <div class="card card-purple"><div class="status-dot dot-purple"></div><div class="card-title">One Source Dependency</div><div class="card-sub">Critical for reliable automations -- timeline TBC</div></div>
+          <div class="card card-purple"><div class="status-dot dot-purple"></div><div class="card-title">GROW Dashboard (Ash)</div><div class="card-sub">Integrate with comms hub data layer</div></div>
+        </div>
+      </div>
+
+      <!-- INFRASTRUCTURE -->
+      <div class="zone zone-indigo">
+        <div class="zone-label">Infrastructure <span class="zone-sublabel">9 items live</span></div>
+        <div class="zone-cards">
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">Asana MCP</div><div class="card-sub">Live</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">M365 MCP</div><div class="card-sub">Read access live</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">Databricks MCP</div><div class="card-sub">Connected, paid-ads + marketing tables queried</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">Fireflies MCP</div><div class="card-sub">Connected</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">EA Workspace</div><div class="card-sub">Claude Code second brain</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">Cron Jobs</div><div class="card-sub">Morning + evening check-ins, 4pm review</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">Decision Log</div><div class="card-sub">15 decisions logged</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">GitHub Remote</div><div class="card-sub">Private repo, set up 26 March</div></div>
+          <div class="card card-indigo"><div class="status-dot dot-blue"></div><div class="card-title">Vercel Deployment</div><div class="card-sub">This site, live</div></div>
+        </div>
+      </div>
+
+      <!-- SALES & BD -->
+      <div class="zone zone-green">
+        <div class="zone-label">Sales &amp; BD <span class="zone-sublabel">3 shipped &middot; 5 parked</span></div>
+        <div class="zone-cards">
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Call Quality Portal</div><div class="card-sub">Shipped -- Phases 1-5, AI-scored review + coaching</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">BD Proposal Studio</div><div class="card-sub">Shipped -- Nick's decks ported, 12-phase build</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Sales Hub Cockpit</div><div class="card-sub">Shipped -- live Sales boards + RelatedTools strip</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">Churn Dashboard</div><div class="card-sub">Parked -- Jacqueline leads</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">NDIS Brain</div><div class="card-sub">Parked -- Andy Wallace spec done</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">Trilogy GPT Hub</div><div class="card-sub">Parked -- Bernie's vision</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">BD Lead Research Automation</div><div class="card-sub">Parked -- Nick idea</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">CRM Dedup + NDIS Import</div><div class="card-sub">Parked -- Jack, Zoho CRM cleanup</div></div>
+        </div>
+      </div>
+
+      <!-- BLOCKED -->
+      <div class="zone zone-orange">
+        <div class="zone-label">Blocked <span class="zone-sublabel">3 open &middot; 2 resolved</span></div>
+        <div class="zone-cards">
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Databricks Read Access</div><div class="card-sub">Resolved -- paid-ads + marketing tables granted via tc-cli</div></div>
+          <div class="card card-green"><div class="status-dot dot-blue"></div><div class="card-title">Shared Build Env</div><div class="card-sub">Resolved -- GROW deploys to ECS via CI</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">Brand Intel API Access</div><div class="card-sub">Tim + Paul sign-off needed -- Nick to facilitate</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">Canva API Credentials</div><div class="card-sub">Path B -- waiting on api_key + brand_kit_id + template IDs (TRI-397)</div></div>
+          <div class="card card-orange"><div class="status-dot dot-orange"></div><div class="card-title">Aircall API Keys</div><div class="card-sub">Call Quality runs end-to-end; deeper Aircall integration parked</div></div>
+        </div>
+      </div>
+
+      <!-- NEWLY SURFACED -->
+      <div class="zone zone-yellow">
+        <div class="zone-label">Newly Surfaced <span class="zone-sublabel">Not yet formally actioned</span></div>
+        <div class="zone-cards">
+          <div class="card card-yellow"><div class="status-dot dot-purple"></div><div class="card-title">ORM Automation (Miranda)</div><div class="card-sub">Meta API, Month 2-3</div></div>
+          <div class="card card-yellow"><div class="status-dot dot-purple"></div><div class="card-title">ESP Platform Decision</div><div class="card-sub">Consumer IO vs ActiveCampaign</div></div>
+          <div class="card card-yellow"><div class="status-dot dot-purple"></div><div class="card-title">Zoe Judd Follow-up</div><div class="card-sub">Back from leave -- reconnect</div></div>
+          <div class="card card-yellow"><div class="status-dot dot-purple"></div><div class="card-title">Romy Blacklaw Relationship</div><div class="card-sub">Beyond scoping session</div></div>
+          <div class="card card-yellow"><div class="status-dot dot-purple"></div><div class="card-title">Legal / AgedCare Compare</div><div class="card-sub">Aaron "Powered by Trilogy"</div></div>
+          <div class="card card-yellow"><div class="status-dot dot-purple"></div><div class="card-title">One Source Timeline</div><div class="card-sub">Katja to confirm</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════ SECTION 3: SHIPPED INITIATIVES / GROW BUILD LOG ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#22c55e">Build Log</div>
+    <div class="section-title">Shipped Initiatives - GROW Platform</div>
+    <div class="section-desc">Every shipped change in tc-grow-applications since the first commit on 7 April. 45 days, 600+ commits, 387 PRs merged, 22 workstreams.</div>
+
+    <!-- BUILD-LOG HEADLINE STATS -->
+    <div class="stats-row" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 14px;">
+      <div class="stat-card" style="--accent-color:#3b82f6"><div class="stat-num" style="color:#3b82f6">600+</div><div class="stat-label">Commits</div><div class="stat-sub">across 35+ active days</div></div>
+      <div class="stat-card" style="--accent-color:#16a34a"><div class="stat-num" style="color:#16a34a">387</div><div class="stat-label">Pull requests merged</div><div class="stat-sub">squash-merged via review queue</div></div>
+      <div class="stat-card" style="--accent-color:#f59e0b"><div class="stat-num" style="color:#f59e0b">900+</div><div class="stat-label">Files touched</div><div class="stat-sub">unique files modified or created</div></div>
+      <div class="stat-card" style="--accent-color:#7c3aed"><div class="stat-num" style="color:#7c3aed">22</div><div class="stat-label">Initiatives</div><div class="stat-sub">distinct workstreams shipped</div></div>
+    </div>
+    <div class="stats-row" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 28px;">
+      <div class="stat-card" style="--accent-color:#0ea5e9"><div class="stat-num" style="color:#0ea5e9">+250k</div><div class="stat-label">Lines added</div><div class="stat-sub">backend, frontend, infra</div></div>
+      <div class="stat-card" style="--accent-color:#dc2626"><div class="stat-num" style="color:#dc2626">-30k+</div><div class="stat-label">Lines removed</div><div class="stat-sub">refactors + dead-code purges</div></div>
+      <div class="stat-card" style="--accent-color:#3b82f6"><div class="stat-num" style="color:#3b82f6">35+</div><div class="stat-label">Active days</div><div class="stat-sub">of 45 elapsed since Day 0</div></div>
+      <div class="stat-card" style="--accent-color:#16a34a"><div class="stat-num" style="color:#16a34a">75</div><div class="stat-label">Biggest week</div><div class="stat-sub">PRs merged 15-22 May (Call Quality week)</div></div>
+    </div>
+
+    <!-- INITIATIVE CARDS -->
+    <div class="initiatives-grid">
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Call Quality Portal &mdash; Phases 1&ndash;5</div><div class="init-range">14&ndash;20 May</div></div>
+        <div class="init-desc">The week's largest build, delivered front-to-back. AI-scored sales-call review portal: read-only dashboards, review trigger + status polling, an auto-pipeline admin panel, a coaching card with Word-doc download and Teams delivery, an Aircall webhook for instant post-call review, and a rep-facing "Your calls" view.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Sales</span><span class="init-tag">AI</span></div>
+        <ul class="init-list">
+          <li>Phases 1&ndash;2 &mdash; scaffold, sales-leader gate, read-only dashboards</li>
+          <li>Phase 3 &mdash; Aircall + review pipeline + Celery; review trigger + status polling</li>
+          <li>Phase 4 &mdash; Celery Beat auto-pipeline + admin panel</li>
+          <li>Phase 5 &mdash; coaching card, Word-doc download, Teams delivery</li>
+          <li><strong>Instant post-call review</strong> via Aircall webhook; rep-facing "Your calls" view; coaching loop with Playbook deep-links</li>
+          <li>Server-side caching + Refresh; scores-parsing correctness fix (one MCP-gateway routing experiment shipped then deliberately reverted)</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">BD Proposal Studio</div><div class="init-range">13&ndash;17 May</div></div>
+        <div class="init-desc">Ported Nick's partner pitch decks into GROW as a proposal studio &mdash; backend foundation, slide infrastructure, public viewer + tracking, rep authoring wizard, server-side PDF/PPTX export, an in-editor AI assistant, and Nick-parity UI.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">BD</span><span class="init-tag">AI</span></div>
+        <ul class="init-list">
+          <li>12-phase build: foundation &rarr; slide library &rarr; live presentation</li>
+          <li>Nick's source pitch decks are the pixel source of truth</li>
+          <li>SlideContent type system; LLM "tweak" feature with scope + history</li>
+          <li>Partner <code>/p/{slug}/hub</code>, engagement webhook, win/loss capture, NDIS-platform gaps closed</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Paid Ads &mdash; Snapshot &amp; Optimiser</div><div class="init-range">9&ndash;20 May</div></div>
+        <div class="init-desc">Read-only Meta + Google performance intelligence. A daily LLM-narrated Snapshot, an all-campaign performance view + monthly budget tracker, Google Optimiser search-term clustering, and a GitHub Actions cron syncing Databricks &rarr; MySQL &rarr; snapshot.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Marketing</span><span class="init-tag">AI</span></div>
+        <ul class="init-list">
+          <li>v1 daily Snapshot &mdash; Meta + Google via Databricks, LLM-narrated read</li>
+          <li>v1.5 funnel + heatmap + flagged anomalies; v2.B channel-level true CPF</li>
+          <li>All-campaign view + monthly budget tracker; Meta data via the MCP gateway</li>
+          <li>GHA Databricks sync + Python KPI pre-compute + server/client caching</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Marketing Intelligence &amp; Mission Control</div><div class="init-range">10&ndash;18 May</div></div>
+        <div class="init-desc">A cross-source Marketing Intelligence page (funnel, channel mix, attribution, forecast, creative leaderboard, geo heatmap, daily AI read) and Mission Control v0.1&ndash;v0.4 &mdash; editable prompts for all agents, operating procedures, a live agent graph, and a release-notes audit log.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Marketing</span></div>
+        <ul class="init-list">
+          <li>Marketing Intelligence wired to live data across every section</li>
+          <li>Attribution + Forecast live; Campaign Context in the Daily Read</li>
+          <li>Mission Control &mdash; editable prompts for all agents, audit via Prompt Engineer Agent</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">ORM / online-reputation tooling</div><div class="init-range">17&ndash;19 May</div></div>
+        <div class="init-desc">Online-reputation management hardening: a PR review pass (auto-redact, dash strip, AI-detection gate), Research Mode scaffold, a knowledge base seeded with the 24-entry team FAQ, Seek + Glassdoor as reply platforms, and ORM Escalation v2 with an employer route.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Marketing</span></div>
+        <ul class="init-list">
+          <li>PR review pass &mdash; auto-redact, dash strip, AI detection</li>
+          <li>Knowledge base + call-to-action rule; 24-entry FAQ sheet seeded</li>
+          <li>Seek + Glassdoor added as reply platforms</li>
+          <li>ORM Escalation v2 &mdash; procedure-complete intake + employer route</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">LLM architecture hardening</div><div class="init-range">20 May</div></div>
+        <div class="init-desc">Typed AI wrappers and a feature contract for the <code>/api/ai</code> proxy, per-call observability with feature attribution, an <code>/admin/llm-usage</code> dashboard, and migration of four features off the private bypass path.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Backend</span><span class="init-tag">Security</span></div>
+        <ul class="init-list">
+          <li>Typed AI wrappers + feature contract for <code>/api/ai</code></li>
+          <li>Per-call observability with feature attribution</li>
+          <li>comms_intake, roadmap_agent, website_audit, health_checks migrated off the bypass</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Copywriter, Writer &amp; Headshots</div><div class="init-range">13&ndash;20 May</div></div>
+        <div class="init-desc">A unified Copywriter (7 parallel review LLM calls, AI-detection engine, humanizer, PR mode), a simpler company-wide Writer, and a Headshot Processor upgrade (YuNet + SFace, three-step review wizard).</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Marketing</span><span class="init-tag">AI</span></div>
+        <ul class="init-list">
+          <li>Copywriter &mdash; 7 parallel LLM review calls, AI detection 2, humanizer voice samples</li>
+          <li>Company-wide Writer &mdash; simpler sibling of the marketing Copywriter</li>
+          <li>Headshot Processor &mdash; YuNet + SFace, three-step wizard</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Loading system, Sales cockpit &amp; nav</div><div class="init-range">17&ndash;20 May</div></div>
+        <div class="init-desc">AgentLoader + OrbitLoader loading animations with a Loader Lab, the Sales hub rebuilt as a live cockpit, a shared RelatedTools strip across Sales boards, GROW tools re-grouped by discipline, and hub pages for Copywriter / Paid Ads / Writer.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">UX</span><span class="init-tag">Nav</span></div>
+        <ul class="init-list">
+          <li>AgentLoader + OrbitLoader loading system + Loader Lab</li>
+          <li>Sales hub rebuilt as a live cockpit; shared RelatedTools strip</li>
+          <li>GROW area tools re-grouped by discipline; Copywriter / Paid Ads / Writer hubs</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Platform foundations &amp; AppShell</div><div class="init-range">7&ndash;23 Apr</div></div>
+        <div class="init-desc">Bootstrapped the FastAPI + Next.js 16 monorepo, ECS deployment, OAuth via TC Accounts, and Mike's tc-assistant-pattern dual-panel shell with thin rail, AreaSidebar, Help Centre, and waffle launcher.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Infra</span><span class="init-tag">Shell</span></div>
+        <ul class="init-list">
+          <li><strong>TC AppShell</strong> with starter thin-rail nav, dual panel, contextual AreaSidebar</li>
+          <li>Sticky glass <strong>PageHeader</strong>, greeting hero, Teams-style splitter for AreaSidebar</li>
+          <li>Help Centre, Petal loader, Waffle (TC suite + external tools), feedback button, error pages</li>
+          <li>OAuth callback, JWT validation via JWKS, Employment Hero enrichment on login</li>
+          <li>Docker glibc fix + Node 20 runtime + ECS rollback detection (the rough deploy week)</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Marketing Hub &amp; tools migration</div><div class="init-range">8&ndash;26 Apr</div></div>
+        <div class="init-desc">Ported the Lovable comms hub and a dozen marketing tools into GROW &mdash; brand profiles, comms brief, comms register, segment library, content calendar, RACI builder, ORM, UTM builder.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Marketing</span></div>
+        <ul class="init-list">
+          <li>Internal comms hub migrated <strong>from Lovable into GROW</strong></li>
+          <li><strong>Brand Profiles</strong> tool (partner brand intelligence + scraping pipeline)</li>
+          <li><strong>UTM Builder</strong> 3-tab redesign (Library, Presets, colour-coded preview)</li>
+          <li><strong>Content Calendar</strong> with grid view, platform icons, summary stats, CSV export</li>
+          <li>Segment Library / RACI Builder / Comms Planning <strong>restricted to Marketing team</strong></li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Marketing Request &amp; review queue</div><div class="init-range">15 Apr&ndash;1 May</div></div>
+        <div class="init-desc">Unified marketing intake. Cross-team Active Requests board, drafts table, approve/reject queue, email notifications, file attachments, synthetic monitor, and a dedicated review page.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Comms</span></div>
+        <ul class="init-list">
+          <li>3-box AI-guided <strong>Comms Intake</strong> at <code>/company/comms-intake</code> with classification gate</li>
+          <li>Marketing Request page + Internal Marketing Hub <strong>merged into one unified flow</strong></li>
+          <li>Drafts table, approve/reject queue, email notifications, file attachments</li>
+          <li><strong>Synthetic Marketing Request monitor</strong> (admin endpoint, drives health board)</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Sales Playbook &amp; Coordinator Lookup</div><div class="init-range">27 Apr&ndash;1 May</div></div>
+        <div class="init-desc">Sales-rep tooling. Ported the Sales Playbook portal end-to-end into GROW; built a Coordinator Lookup with postcode search, Leaflet coverage map, View Profile and Refer Client modals, then moved it into the Sales sidebar.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Sales</span></div>
+        <ul class="init-list">
+          <li>Sales Playbook portal <strong>ported end-to-end into GROW</strong></li>
+          <li>Coordinator Lookup &mdash; postcode search, Leaflet map, geocoded centroids</li>
+          <li>View Profile modal (onboarding status, tenure, coverage)</li>
+          <li>Refer Client modal (form + email routing via TC Graph Entra SP)</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Mission Control, Pit Wall &amp; Admin</div><div class="init-range">22 Apr&ndash;3 May</div></div>
+        <div class="init-desc">An F1-pit-wall-style TV kiosk for the office screen plus an admin observability layer &mdash; health-check status board, per-agent SLA dashboard, recent Linear activity feed, and run-time agent status toggles.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Kiosk</span><span class="init-tag">Admin</span></div>
+        <ul class="init-list">
+          <li>Pit Wall TV kiosk + <strong>Sales GP drag race</strong> + marketing + sales-pulse boards</li>
+          <li><strong>Health Checks</strong> status board + synthetic monitor</li>
+          <li>Per-agent <strong>SLA dashboard</strong> at <code>/admin/sla</code> with 7/14/30/90-day filter</li>
+          <li>Recent Linear activity feed on <code>/admin</code>; backend-persisted agent status toggles</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Roadmap Agent, Policy Check &amp; Market Sentiment</div><div class="init-range">17 Apr&ndash;3 May</div></div>
+        <div class="init-desc">AI-assisted analyst tools. A Roadmap Agent that surfaces weekly roadmap suggestions, a Policy Check content-compliance tool, and Market Sentiment v3 with per-pillar insights, citations, and a Support-at-Home landscape briefing.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Admin</span></div>
+        <ul class="init-list">
+          <li>Roadmap Agent v0&rarr;v1 &mdash; suggestions panel then weekly AI scan + manual trigger</li>
+          <li><strong>Policy Check</strong> &mdash; backend service + endpoint + frontend page</li>
+          <li>Market Sentiment v3 &mdash; Support at Home landscape, briefing + 7 new live sources</li>
+          <li>Switched from the Anthropic SDK to the internal Trilogy LLM service</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">Partner Collateral &amp; ORM Escalation</div><div class="init-range">15&ndash;30 Apr</div></div>
+        <div class="init-desc">A partner-flyer pipeline (pricing calculator, S3 storage, Canva integration service, Download-All ZIP) and an online-reputation escalation form &mdash; char counts, drag-and-drop screenshots, and a DB-backed editable prompt template.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Marketing</span><span class="init-tag">Canva pending</span></div>
+        <ul class="init-list">
+          <li>Pricing calculator + extended schema + dual-mode Claude prompts</li>
+          <li><strong>S3 storage</strong> for PDFs + logos; Download-All ZIP + Edit-in-Canva buttons</li>
+          <li>ORM escalation form &mdash; char count, regenerate, drag-and-drop screenshot upload</li>
+          <li><strong>Switched from Zoho CRM API to Zoho Forms prefill URL</strong> (interim until Portal)</li>
+        </ul>
+      </div>
+
+      <div class="init-card">
+        <div class="init-head"><div class="init-title">AI proxy, agents directory &amp; nav polish</div><div class="init-range">19 Apr&ndash;3 May</div></div>
+        <div class="init-desc">Moved every AI call server-side and migrated to the internal Trilogy LLM service; built a top-level <code>/agents</code> directory with a Gather-style pixel-art Agent House; ran a whole-platform nav restructure and a wide UX pass.</div>
+        <div class="init-tags"><span class="init-tag live">Live</span><span class="init-tag">Backend</span><span class="init-tag">Nav</span></div>
+        <ul class="init-list">
+          <li>Proxy Anthropic calls through FastAPI at <code>/api/ai</code>; migrate to the Trilogy LLM service</li>
+          <li><strong>Top-level /agents page</strong> &mdash; directory, activity feed, pixel-art Agent House</li>
+          <li>Sales / BD / Marketing Ops sections; NEW / UPDATED badges with 7-day auto-expiry</li>
+          <li>Dark-mode polish across live-call / playbook / hubs; AreaSidebar <strong>always open</strong></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- DAY-BY-DAY BUILD LOG -->
+    <div style="margin-top:32px;">
+      <div class="section-title" style="font-size:18px;">The full git history</div>
+      <div class="section-desc">Every commit and PR shipped against tc-grow-applications since 7 April. Newest first.</div>
+
+      <div class="buildlog-wrap">
+        <div class="buildlog-toolbar">
+          <span class="bl-label">35+ active days &middot; 600+ commits</span>
+          <button class="bl-btn" id="expand-toggle" type="button">Expand all</button>
+        </div>
+        <div class="buildlog" id="buildlog">
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">22 May 2026</div><div class="day-num">Fri &middot; Day 45</div><span class="day-count">repo tidy</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">repo-root declutter (#388, open) &mdash; tidy stray files at the repo root</span></div>
+              <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">/admin/llm-usage dashboard refinement (#382, open)</span></div>
+              <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">file_extraction off the Anthropic SDK (#380, open &mdash; speculative)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">20 May 2026</div><div class="day-num">Tue &middot; Day 43</div><span class="day-count">22 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">llm: typed AI wrappers + feature contract for /api/ai proxy (#377)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">llm: per-call observability with feature attribution (#369)</span></div>
+              <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">llm: migrate comms_intake_ai + roadmap_agent off the private bypass (#372)</span></div>
+              <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">llm: migrate website_audit + health_checks off the private bypass (#379)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: GitHub Actions cron syncs Databricks &rarr; MySQL &rarr; snapshot (#366)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: pre-compute KPIs + channel rollup in Python (#370)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">perf: cache Paid Ads + Sales hub responses (server + client) (#371)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: server-side cache for Call Quality + Refresh button (#381)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">company: add company-wide Writer &mdash; simpler sibling of Copywriter (#368)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">hubs: surface Copywriter, Paid Ads, and Writer on their hub pages (#376)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">call-quality: three bugs on the review detail page (#378)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">drop committed frontend/node_modules symlink &mdash; broke Docker build (#373)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">lead-quality: point stamping coverage at live attribution columns (#346)</span></div>
+              <div class="day-item"><span class="di-prefix test">test</span><span class="di-text">pass-through the response_cache in every backend test (#383)</span></div>
+              <div class="day-item"><span class="di-prefix ux">ux</span><span class="di-text">nav + sales: sentence-case Call Quality / Client Lookup / hub labels + semantic tokens (#375, #384, #385, #386)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">19 May 2026</div><div class="day-num">Mon &middot; Day 42</div><span class="day-count">13 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: add Seek and Glassdoor as ORM reply platforms (#353)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: Escalation v2 &mdash; procedure-complete intake + employer route (#359)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">headshots: upgrade to YuNet + SFace, group&rarr;finalize flow (#360)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">headshots: three-step review wizard for the Headshot Processor (#358)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">ui: OrbitLoader (20s countdown) + loader alternatives + Loader Lab (#357)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">ui: adopt OrbitLoader as the GROW loading screen (#356)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">tasks: add weekly policy-checker compliance watch (#355)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: source Meta data from the MCP gateway (#361)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">paid-ads: tool_choice reliability fixes for the LLM service (#363, #364)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">deps: cap PyMySQL below 1.2 to unbreak the build (#362)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">copywriter: move the amendments tile to Haiku for a faster review (#354)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">18 May 2026</div><div class="day-num">Sun &middot; Day 41</div><span class="day-count">7 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: instant post-call review &mdash; Aircall webhook (#345)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: rep-facing "Your calls" view (#342)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: coaching loop &mdash; focus banner + Playbook deep-link (#343)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: surface auto-review activity + access-restricted state (#340)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-intelligence: wire Attribution + Forecast to live data (#349)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-intelligence: add Campaign Context for the Daily Read (#351)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: connect the islands &mdash; shared RelatedTools strip (#344)</span></div>
+              <div class="day-item"><span class="di-prefix chore">revert</span><span class="di-text">revert: route Aircall through the TC MCP gateway (#348 shipped, then #350 reverted after testing)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">17 May 2026</div><div class="day-num">Sat &middot; Day 40</div><span class="day-count">13 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: PR review pass &mdash; auto-redact, dash strip, AI detection (#324)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: Research Mode &mdash; TC Assistant context check (scaffold) (#325)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: knowledge base + call-to-action rule; seed with team FAQ sheet (#326, #328)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: all-campaign performance + monthly budget tracker (#336)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: close NDIS-platform gaps &mdash; template feedback + image upload (#335)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">ui: AgentLoader loading animation + GROW app framework doc (#329)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: turn the Sales hub into a live cockpit (#332)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">copywriter: add PR mode &mdash; draft public responses + auto-review (#323)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">nav: group GROW area tools by discipline, not workflow stage (#327)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: consistent error + friendly empty states; standardise chrome (#331, #333, #334)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">call-quality: correct scores_json parsing + lift aggregation cap (#322)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">nav: restore Client Lookup + Sales Playbook to Sales nav (#338)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">15 May 2026</div><div class="day-num">Thu &middot; Day 38</div><span class="day-count">13 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 3 &mdash; review trigger + status polling; backend pipeline + Celery (#310, #311)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 4 &mdash; Celery Beat auto-pipeline + admin panel (#312, #314)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 5 &mdash; coaching card, Word doc + Teams delivery (#313, #315)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: wire Nick's source pitch deck URLs onto template cards (#296)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: SlideContent types + all slide-cluster content + LLM tweak feature (#297, #316, #317)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">brand-profiles: one-click competitor seed + External Comms Hub sidebar group (#318)</span></div>
+              <div class="day-item"><span class="di-prefix security">sec</span><span class="di-text">add robots.ts + strengthen metadata.robots (#285)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">alembic: linearise migration chain &mdash; dedupe 0035, fork at 0038/0039 (#320)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">call-quality: restore Phase 2 frontend clobbered by a rebase (#319)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">14 May 2026</div><div class="day-num">Wed &middot; Day 37</div><span class="day-count">7 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 1 scaffold + sales-leader gate; Phase 2 read-only dashboards (#302, #303, #306)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 3 backend &mdash; Aircall + review pipeline + Celery (#311)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: Phase 11 editor polish + engagement webhook + win/loss; Phase 12 live presentation + PPTX (#293, #295)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">linear: top-level Linear Tickets board with cached Marketing-team feed (#294)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">13 May 2026</div><div class="day-num">Tue &middot; Day 36</div><span class="day-count">28 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: Phases 1&ndash;10 &mdash; foundation, slide infra, public viewer, authoring wizard, PDF export, in-editor AI, Nick-parity UI, partner hub (#273&ndash;#292)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-intelligence: promote dream layout to live page; wire Funnel, Channel Mix, Lead Quality, Brand Health, Anomalies, Geo, Daily Read, Creative Leaderboard (#276&ndash;#290)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">copywriter: unified scaffold &mdash; real backend with 7 parallel LLM calls, AI detection 2, humanizer, templates (#266, #268, #269, #270)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: Marketing Intelligence tile &mdash; cross-source data summary (#271)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">paid-ads / lead-quality: bound Databricks + LLM with degraded fallback; Redis cache + stale fallback (#264, #280)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">11 May 2026</div><div class="day-num">Sun &middot; Day 34</div><span class="day-count">21 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">mission-control: v0.3 editable prompts for all agents + audit; v0.4 operating procedures, live graph, release notes (#247, #249, #251, #254)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: v2.B Lead Quality channel-level true CPF + LLM advisor + Snapshot cross-cut (#252, #255, #256)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: Social Sentiment Capture &mdash; paste FB groups / Reddit / IG, get audience intel (#246)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">intake: blog_article + paid_media + orm_reply routing; pre-submission validation gate (#244, #245)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: inbox status board &mdash; high-level Linear queue view (#226)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">linear-agents: label-driven firing &mdash; only run agents matching issue labels (#224)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">grow: restore /dashboards page deleted by #210 &mdash; Jackie uses these reports (#238)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">10 May 2026</div><div class="day-num">Sat &middot; Day 33</div><span class="day-count">19 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">mission-control: v0.1&ndash;v0.4 &mdash; page shell, System Snapshot/Health, Scope of Work, Pipeline kanban, Quality (#211&ndash;#223)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: live Databricks data + 30d/6m windows; v1.5 funnel + heatmap + anomalies; v2.C Google Optimiser (#212, #213, #221, #228)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">analytics: Client Balance Sheet dashboard + CEO Pulse Card (#229, #232)</span></div>
+              <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">admin: fold redundant admin tabs + pages into Mission Control (#227)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">9 May 2026</div><div class="day-num">Fri &middot; Day 32</div><span class="day-count">4 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: v1 daily snapshot &mdash; Meta + Google via Databricks &rarr; LLM-narrated read (#200)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">msi: minimalist redesign &mdash; Apple Health / Stripe direction (#203)</span></div>
+              <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">linear: route all Linear access through TC Assistant tools (#204)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">8 May 2026</div><div class="day-num">Thu &middot; Day 31</div><span class="day-count">6 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">home: dashboard v3 &mdash; KPI row, recent activity, pulse charts (#192)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">skills: grow-reviewer &mdash; GROW-only reviewer with learning ledger (#193)</span></div>
+              <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">llm: route remaining user-context callers + Linear webhook agents through the LLM service (#191, #197)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">marketing: list endpoints 401 on mount &mdash; route through authed apiClient (#194)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">6 May 2026</div><div class="day-num">Tue &middot; Day 29</div><span class="day-count">9 PRs</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">grow-ui: overnight UX overhaul &mdash; IA pass, AppSidebar removed, home redesign, button + badge + token consolidation (#181&ndash;#189)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">1&ndash;3 May 2026</div><div class="day-num">Thu&ndash;Sat &middot; Days 25&ndash;27</div><span class="day-count">23 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">agents-activity: pixel-art Agent House view + Gather-style sprite renderer + role labels</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">agents: top-level /agents page &mdash; directory, activity feed, per-agent detail (#100); drill-in from home ticker (#119)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: cupboard catalogue tile for inventory requests (#118)</span></div>
+              <div class="day-item"><span class="di-prefix polish">polish</span><span class="di-text">warm empty states + card aesthetic across roadmap-agent / utm-builder / pit-wall / admin (#123, #124, #126)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">roadmap-agent: show times in AEST, not UTC (#122); degrade gracefully on Linear failures (#130)</span></div>
+              <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">dashboards cleanup &mdash; remove stale cards; move TL REM Calculator + Coordinator Lookup to Sales</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">30 Apr 2026</div><div class="day-num">Wed &middot; Day 24</div><span class="day-count">22 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">pit-wall: TV kiosk routes + Sales GP drag race; marketing + sales-pulse boards (#106, #114, #115)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-review: dual-path Marketing Request + review queue page; drafts table + approve/reject + email (#112, #113)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">health-checks: admin status board page + synthetic Marketing Request monitor (#108, #109)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">market-sentiment: v3 &mdash; Support at Home landscape, briefing, market position + 7 new sources (#102)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">policy-check: backend service + endpoint + frontend page for content compliance (#104, #105)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">admin: roadmap agent v0 + v1 &mdash; suggestions panel then weekly AI scan (#97, #99)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm-escalation: switch from Zoho CRM API to Zoho Forms prefill URL (#98)</span></div>
+              <div class="day-item"><span class="di-prefix ux">ux</span><span class="di-text">dark-mode polish for sales-playbook tabs, sales + bd hubs, live-call, rail icon glow (#92, #94, #95, #96)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">27&ndash;29 Apr 2026</div><div class="day-num">Sun&ndash;Tue &middot; Days 21&ndash;23</div><span class="day-count">46 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">coordinator-lookup: postcode search, Leaflet coverage map, geocoded centroids, View Profile + Refer Client modals</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales-playbook: port the Sales Playbook portal end-to-end into GROW (#82)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">apps: App Launcher at /apps &mdash; grouped by category, card/list toggle (#77, #78)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">home: live agent activity widget + ticker (#80, #90)</span></div>
+              <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">auto-suggestions: add 4 reviewer skills + suggestions scaffold (#76)</span></div>
+              <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">nav: area sidebar is always open &mdash; remove hide/collapse paths (#81)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">26 Apr 2026</div><div class="day-num">Sat &middot; Day 20</div><span class="day-count">27 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">nav: NEW / UPDATED badges with 7-day auto-expiry (#75)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: add Sales section with coming-soon hub (#74)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">analytics: Marketing Ops dashboard (slice 1: Overview) (#67)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">market-sentiment: per-pillar insights, source citations, week-on-week summary (#66)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-request: merge Internal Hub into one unified brief flow (#57, #58)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: restrict Segment Library / RACI Builder / Comms Planning to the Marketing team (#61, #63, #65)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: drag-and-drop screenshot upload + larger drop zone (#53, #54)</span></div>
+              <div class="day-item"><span class="di-prefix docs">docs</span><span class="di-text">add CONTRIBUTING.md with branch/PR flow + env map (#56)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">23&ndash;25 Apr 2026</div><div class="day-num">Wed&ndash;Fri &middot; Days 17&ndash;19</div><span class="day-count">41 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add TC AppShell (dual-panel) with thin-rail nav, contextual AreaSidebar, Help Centre, waffle launcher</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">admin: per-agent SLA dashboard at /admin/sla + date-range filter; run-time agent status toggle (#25&ndash;#30)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">admin: recent Linear activity feed on /admin; Agents overview section (#21, #31)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add competitor intelligence dashboard &mdash; April 2026</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">jarvis: first real data &mdash; platform health + Linear board beat tasks (#50)</span></div>
+              <div class="day-item"><span class="di-prefix ci">ci</span><span class="di-text">deploy: inject env vars into ECS task def from GitHub secrets; CDK deploy workflow via OIDC (#18, #32)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">24 Apr 2026</div><div class="day-num">Thu &middot; Day 18</div><span class="day-count">30 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">nav: home &rarr; analytics landing, add Business Development section, move tools into hubs (#49)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">partner-collateral: pricing calculator, S3 storage, Canva service, Download-All ZIP + Edit-in-Canva (#35&ndash;#42)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: DB-backed editable prompt template + in-page editor (#46)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sticky glass-morphic PageHeader + greeting hero; shared 404 + runtime error pages</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">ai-proxy: surface upstream LLM errors as JSON instead of 500 (#34)</span></div>
+              <div class="day-item"><span class="di-prefix ux">a11y</span><span class="di-text">type=button across marketing tools; dialog semantics on custom modals; WCAG/ARIA pass</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">21&ndash;22 Apr 2026</div><div class="day-num">Mon&ndash;Tue &middot; Days 15&ndash;16</div><span class="day-count">27 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">comms-intake: 3-box AI-guided intake flow at /company/comms-intake (#19)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: Marketing Request page + Internal Marketing Hub (#14)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: ORM escalation form + Zoho CRM pipeline (#4)</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add Agent Intelligence system &mdash; daily prompt improvement recommendations</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">ai: proxy Anthropic calls through FastAPI at /api/ai; migrate to Trilogy LLM service (#12, #13)</span></div>
+              <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">docker: align Next.js build and runtime on Debian glibc; Node 20 at runtime (#5)</span></div>
+            </div>
+          </div>
+
+          <div class="day-block">
+            <div class="day-meta"><div class="day-date">14&ndash;20 Apr 2026</div><div class="day-num">Mon&ndash;Sun &middot; Days 8&ndash;14</div><span class="day-count">23 commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">migrate the internal comms hub from Lovable into GROW; premium home page redesign</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">content calendar &mdash; grid view, platform icons, summary stats, CSV export</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">UTM builder &mdash; 3-tab redesign with Library, Presets, colour-coded preview</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">Brand Profiles &mdash; partner brand intelligence tool; client lookup, RACI builder</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add Market Sentiment Index, IAT Screening + Churn dashboards; Linear triage workflow</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add JARVIS monitoring backend/frontend + Linear briefs admin page</span></div>
+              <div class="day-item"><span class="di-prefix security">sec</span><span class="di-text">move all AI calls to server-side proxy + upgrade headshot grouping</span></div>
+            </div>
+          </div>
+
+          <div class="day-block" style="background: #f0fdf4;">
+            <div class="day-meta"><div class="day-date" style="color:#16a34a;">7&ndash;8 Apr 2026</div><div class="day-num" style="color:#16a34a;">Mon&ndash;Tue &middot; Days 0&ndash;2</div><span class="day-count" style="color:#16a34a; border-color:#bbf7d0; background:#dcfce7;">First commits</span></div>
+            <div class="day-items">
+              <div class="day-item"><span class="di-prefix feat" style="color:#16a34a; border-color:#bbf7d0; background:#dcfce7;">init</span><span class="di-text"><strong>Bootstrap tc-grow-applications repo</strong> &mdash; FastAPI + Next.js 16 + CDK monorepo, OAuth via TC Accounts, ECS task defs.</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add Comms Brief, Comms Register, Segment Library, Brand Checker, Response Triage, Comms Calendar to Marketing Hub</span></div>
+              <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">add Comms Planning Session tool with AI bot</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ SECTION 4: ACTIVITY + EFFORT ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#0ea5e9">Activity</div>
+    <div class="section-title">Activity Breakdown</div>
+    <div class="section-desc">What's been done, what's open, and where the workload sits right now</div>
+
+    <div class="activity-grid">
+
+      <div class="activity-block">
+        <div class="activity-block-title">Completed</div>
+        <div class="activity-item"><span class="activity-item-label">Actions closed</span><span class="activity-item-value green">50+</span></div>
+        <div class="activity-item"><span class="activity-item-label">Decisions logged</span><span class="activity-item-value green">15</span></div>
+        <div class="activity-item"><span class="activity-item-label">Stakeholder sessions</span><span class="activity-item-value green">60+</span></div>
+        <div class="activity-item"><span class="activity-item-label">SKILL.md files written</span><span class="activity-item-value green">18+</span></div>
+        <div class="activity-item"><span class="activity-item-label">Handoff docs delivered</span><span class="activity-item-value green">6</span></div>
+        <div class="activity-item"><span class="activity-item-label">Tools live in Grow platform</span><span class="activity-item-value green">16+</span></div>
+        <div class="activity-item"><span class="activity-item-label">Workstreams shipped in GROW</span><span class="activity-item-value green">22</span></div>
+        <div class="activity-item"><span class="activity-item-label">GROW PRs merged</span><span class="activity-item-value green">387</span></div>
+      </div>
+
+      <div class="activity-block">
+        <div class="activity-block-title">In Flight (Open Actions)</div>
+        <div class="activity-item"><span class="activity-item-label">Marketing team sessions</span><span class="activity-item-value orange">7</span></div>
+        <div class="activity-item"><span class="activity-item-label">AgedCare Compare</span><span class="activity-item-value orange">5</span></div>
+        <div class="activity-item"><span class="activity-item-label">Comms Hub</span><span class="activity-item-value orange">3</span></div>
+        <div class="activity-item"><span class="activity-item-label">Sales &amp; BD parked builds</span><span class="activity-item-value orange">5</span></div>
+        <div class="activity-item"><span class="activity-item-label">Blocked / waiting on others</span><span class="activity-item-value orange">3</span></div>
+        <div class="activity-item"><span class="activity-item-label">Open GROW PRs</span><span class="activity-item-value orange">3</span></div>
+        <div class="activity-item"><span class="activity-item-label">Newly surfaced, not actioned</span><span class="activity-item-value orange">6</span></div>
+      </div>
+
+      <div class="activity-block">
+        <div class="activity-block-title">Projects in Pipeline</div>
+        <div class="activity-item"><span class="activity-item-label">AgedCare Compare</span><span class="activity-item-value orange">Active sprint + gap strategy</span></div>
+        <div class="activity-item"><span class="activity-item-label">Caring Co Replacement</span><span class="activity-item-value orange">Ready to launch</span></div>
+        <div class="activity-item"><span class="activity-item-label">Canva Batch Agent</span><span class="activity-item-value orange">Blocked on API creds</span></div>
+        <div class="activity-item"><span class="activity-item-label">Partners Hub</span><span class="activity-item-value blue">Scoped, routing TBD</span></div>
+        <div class="activity-item"><span class="activity-item-label">NDIS Brain (Sales)</span><span class="activity-item-value blue">Scoped, parked</span></div>
+        <div class="activity-item"><span class="activity-item-label">Churn Dashboard</span><span class="activity-item-value blue">Jacqueline leads</span></div>
+        <div class="activity-item"><span class="activity-item-label">Linear v2.0 Upgrade</span><span class="activity-item-value blue">Built, deploy pending</span></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ════════ EFFORT ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#6366f1">Effort</div>
+    <div class="section-title">Estimated Hours Invested</div>
+    <div class="section-desc">Claude's estimate of hours spent per category across 62 days - alongside a full-time role</div>
+
+    <table class="effort-table">
+      <thead>
+        <tr>
+          <th style="width:240px">Category</th>
+          <th>What this covers</th>
+          <th style="width:100px">Est. Hours</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="effort-row">
+          <td>Discovery and stakeholder sessions</td>
+          <td>60+ meetings, prep, follow-up notes, action logging, comms hub scoping</td>
+          <td>~70h</td>
+        </tr>
+        <tr class="effort-row">
+          <td>Skills writing and handoffs</td>
+          <td>18+ SKILL.md files, 6 handoff docs, FAQ doc, Claude.ai rewrites, EA skills</td>
+          <td>~22h</td>
+        </tr>
+        <tr class="effort-row">
+          <td>Build work</td>
+          <td>22 workstreams + 16 tools in Grow, Call Quality Portal, BD Proposals, Paid Ads, Marketing Intelligence, Mission Control, JARVIS, 7 apps/prototypes</td>
+          <td>~120h</td>
+        </tr>
+        <tr class="effort-row">
+          <td>Registry, audits, and docs</td>
+          <td>109-item opportunity registry, 21-tool SaaS audit, ORM + Voice-to-Brief specs, compliance audit, 6-competitor deep-dive</td>
+          <td>~28h</td>
+        </tr>
+        <tr class="effort-row">
+          <td>Strategy and planning</td>
+          <td>AI roadmap, 90-day plan, marketing restructure input, AI Strat sessions, KPI framework</td>
+          <td>~16h</td>
+        </tr>
+        <tr class="effort-row">
+          <td>EA setup and tooling</td>
+          <td>Claude Code workspace, 8 MCPs, context files, crons, decision log</td>
+          <td>~14h</td>
+        </tr>
+        <tr class="effort-total">
+          <td>Total estimated</td>
+          <td style="color:#2563eb; font-size:13px;">Delivered in 62 days alongside a full-time role (3.8x AI multiplier sustained)</td>
+          <td>~270h</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note-strip">Estimates by Claude based on session logs, actions.md, and wins.md. Actual time may be higher given context switching and async coordination. Updated 22 May 2026.</p>
+  </div>
+
+  <!-- ════════ CURRENTLY IN FLIGHT ════════ -->
+  <div class="section reveal">
+    <div class="section-label" style="color:#ea580c">In Flight</div>
+    <div class="section-title">What's Open, Parked, or Pending</div>
+    <div class="section-desc">Things shipped but waiting on something external, plus open PRs and judgment calls</div>
+
+    <div class="inflight-grid">
+      <div class="inflight-card">
+        <div class="if-label">Open PR</div>
+        <div class="if-title">Repo-root declutter (#388)</div>
+        <div class="if-detail">Tidies stray files at the repo root. Open, awaiting self-merge.</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">Open PR</div>
+        <div class="if-title">/admin/llm-usage dashboard refinement (#382)</div>
+        <div class="if-detail">Polish on the per-call LLM observability dashboard shipped on 20 May. Open.</div>
+      </div>
+      <div class="inflight-card judgment">
+        <div class="if-label">Open PR &middot; speculative</div>
+        <div class="if-title">file_extraction off the Anthropic SDK (#380)</div>
+        <div class="if-detail">Continues the LLM-bypass cleanup &mdash; moves the file_extraction feature onto the internal LLM service. Open, marked speculative pending review.</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">Pending</div>
+        <div class="if-title">Canva API credentials &mdash; Path B</div>
+        <div class="if-detail">Partner Collateral has the Canva integration service stubbed and env-var gated. Waiting on api_key + brand_kit_id + 3 template IDs to prove the local Canva integration (TRI-397).</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">Parked</div>
+        <div class="if-title">Aircall API keys for Call Quality</div>
+        <div class="if-detail">Call Quality runs end-to-end; the deeper Aircall integration is parked pending dedicated Aircall API keys. The MCP-gateway routing experiment (#348) was shipped then reverted (#350) &mdash; GROW went direct.</div>
+      </div>
+      <div class="inflight-card">
+        <div class="if-label">Pending</div>
+        <div class="if-title">Brand Intelligence API access</div>
+        <div class="if-detail">Brand Intelligence needs GA4, Search Console and SEMrush sign-off from Tim (CTO) and Paul. Still blocked &mdash; Nick to facilitate on his return.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer reveal">
+    Trilogy Care &middot; AI Innovations &middot; Imran Mehmood &middot; Day 62 of 90 &middot; Last updated 22 May 2026
+  </div>
+
+  </div><!-- end .page-container -->
+
+  <script>
+    // ─── Scroll Reveal ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 60);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ─── Animated Number Counters ───
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = parseInt(el.dataset.count);
+          if (!target) return;
+          const duration = 1200;
+          const start = performance.now();
+          const animate = (now) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(target * eased);
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+          counterObserver.unobserve(el);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('[data-count]').forEach(el => counterObserver.observe(el));
+
+    // ─── Animated KPI Bars ───
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fills = entry.target.querySelectorAll('.kpi-bar-fill[data-width]');
+          fills.forEach((fill, i) => {
+            setTimeout(() => {
+              fill.style.width = fill.dataset.width;
+            }, i * 120);
+          });
+          barObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.kpi-table').forEach(el => barObserver.observe(el));
+
+    // ─── Build-log expand-all toggle ───
+    (function() {
+      var btn = document.getElementById('expand-toggle');
+      var bl = document.getElementById('buildlog');
+      if (!btn || !bl) return;
+      btn.addEventListener('click', function() {
+        var isExpanded = bl.classList.toggle('expanded');
+        btn.textContent = isExpanded ? 'Collapse' : 'Expand all';
+      });
+    })();
+  </script>
+
+</body>
+</html>
