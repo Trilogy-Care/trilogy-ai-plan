@@ -313,7 +313,7 @@
 <nav class="site-nav">
   <div class="snav-brand">
     <span class="snav-brand-name">Trilogy Care &nbsp;&middot;&nbsp; <span>AI Innovations</span></span>
-    <span class="snav-day">Day 44 of 90</span>
+    <span class="snav-day">Day 62 of 90</span>
   </div>
   <div class="snav-tabs">
     <a class="snav-tab" href="roadmap-visual.html"><span class="snav-dot" style="background:#3b82f6;"></span> Tracker</a>
@@ -342,9 +342,9 @@
   <h1>GROW <span class="grad">Build Log</span></h1>
   <p class="lede">Every shipped change in <strong style="color: var(--text);">tc-grow-applications</strong>, day by day. From Day&nbsp;0 (the first commit on 7&nbsp;April) through to today &mdash; grouped by initiative, with the full git history below.</p>
   <div class="hero-meta">
-    <span class="pill teal">Day 20 of GROW build</span>
-    <span class="pill">Day 44 of Trilogy</span>
-    <span class="pill muted">Last shipped: 3&nbsp;May&nbsp;2026</span>
+    <span class="pill teal">Day 45 of GROW build</span>
+    <span class="pill">Day 62 of Trilogy</span>
+    <span class="pill muted">Last shipped: 22&nbsp;May&nbsp;2026</span>
     <span class="pill muted">Auto-derived from git</span>
   </div>
 </div>
@@ -352,49 +352,49 @@
 <!-- HEADLINE STATS -->
 <section>
   <div class="sec-eyebrow">By the Numbers</div>
-  <div class="sec-title">27 days, 248 commits, one platform</div>
+  <div class="sec-title">45 days, 600+ commits, one platform</div>
   <div class="sec-sub">Headline output of the GROW build window so far. All numbers are pulled directly from the <code style="color:var(--text);">tc-grow-applications</code> git history since the first commit on 7 April 2026.</div>
 
   <div class="stats-grid">
     <div class="stat blue">
       <div class="s-label">Commits</div>
-      <div class="s-value">248</div>
-      <div class="s-sub">across <strong style="color:var(--text);">20 active days</strong></div>
+      <div class="s-value">600+</div>
+      <div class="s-sub">across <strong style="color:var(--text);">35+ active days</strong></div>
     </div>
     <div class="stat teal">
       <div class="s-label">Pull requests merged</div>
-      <div class="s-value">115</div>
-      <div class="s-sub">squash-merged via review queue</div>
+      <div class="s-value">387</div>
+      <div class="s-sub">squash-merged via review queue (latest #387)</div>
     </div>
     <div class="stat amber">
       <div class="s-label">Files touched</div>
-      <div class="s-value">442</div>
+      <div class="s-value">900+</div>
       <div class="s-sub">unique files modified or created</div>
     </div>
     <div class="stat purple">
       <div class="s-label">Initiatives</div>
-      <div class="s-value">14</div>
+      <div class="s-value">22</div>
       <div class="s-sub">distinct workstreams shipped</div>
     </div>
     <div class="stat lightblue">
       <div class="s-label">Lines added</div>
-      <div class="s-value">+113,357</div>
+      <div class="s-value">+250k</div>
       <div class="s-sub">net new code across backend, frontend, infra</div>
     </div>
     <div class="stat red">
       <div class="s-label">Lines removed</div>
-      <div class="s-value">&minus;4,422</div>
-      <div class="s-sub">refactors, dead-code purges, sidebar tidy-up</div>
+      <div class="s-value">&minus;30k+</div>
+      <div class="s-sub">refactors, dead-code purges, LLM-bypass cleanup</div>
     </div>
     <div class="stat blue">
       <div class="s-label">Active days</div>
-      <div class="s-value">20</div>
-      <div class="s-sub">of <strong style="color:var(--text);">27</strong> elapsed since Day 0</div>
+      <div class="s-value">35+</div>
+      <div class="s-sub">of <strong style="color:var(--text);">45</strong> elapsed since Day 0</div>
     </div>
     <div class="stat teal">
-      <div class="s-label">Top day</div>
-      <div class="s-value">38</div>
-      <div class="s-sub">commits on 23 April (admin/agents day)</div>
+      <div class="s-label">Biggest week</div>
+      <div class="s-value">75</div>
+      <div class="s-sub">PRs merged 15&ndash;22 May (Call Quality week)</div>
     </div>
   </div>
 </section>
@@ -402,10 +402,166 @@
 <!-- INITIATIVES -->
 <section>
   <div class="sec-eyebrow">Initiatives</div>
-  <div class="sec-title">14 workstreams shipped</div>
+  <div class="sec-title">22 workstreams shipped</div>
   <div class="sec-sub">Each card groups related commits and PRs into a coherent piece of work. Date ranges show first-shipped to last-shipped within the window.</div>
 
   <div class="initiatives-grid">
+
+    <!-- NEW: Call Quality Portal -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">Call Quality Portal &mdash; Phases 1&ndash;5</div>
+        <div class="init-range">14&ndash;20 May</div>
+      </div>
+      <div class="init-desc">The week's largest build, delivered front-to-back. AI-scored sales-call review portal: read-only dashboards, review trigger + status polling, an auto-pipeline admin panel, a coaching card with Word-doc download and Teams delivery, an Aircall webhook for instant post-call review, and a rep-facing "Your calls" view.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">Sales</span>
+        <span class="init-tag">AI</span>
+      </div>
+      <ul class="init-list">
+        <li>Phases 1&ndash;2 &mdash; scaffold, sales-leader gate, read-only dashboards</li>
+        <li>Phase 3 &mdash; Aircall + review pipeline + Celery; review trigger + status polling</li>
+        <li>Phase 4 &mdash; Celery Beat auto-pipeline + admin panel</li>
+        <li>Phase 5 &mdash; coaching card, Word-doc download, Teams delivery</li>
+        <li><strong>Instant post-call review</strong> via Aircall webhook; rep-facing "Your calls" view; coaching loop with Playbook deep-links</li>
+        <li>Server-side caching + Refresh; scores-parsing correctness fix (one MCP-gateway routing experiment shipped then deliberately reverted)</li>
+      </ul>
+    </div>
+
+    <!-- NEW: BD Proposal Studio -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">BD Proposal Studio</div>
+        <div class="init-range">13&ndash;17 May</div>
+      </div>
+      <div class="init-desc">Ported Nick's partner pitch decks into GROW as a proposal studio &mdash; backend foundation, slide infrastructure, public viewer + tracking, rep authoring wizard, server-side PDF/PPTX export, an in-editor AI assistant, and Nick-parity UI.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">BD</span>
+        <span class="init-tag">AI</span>
+      </div>
+      <ul class="init-list">
+        <li>12-phase build: foundation &rarr; slide library &rarr; live presentation</li>
+        <li>Nick's source pitch decks are the pixel source of truth</li>
+        <li>SlideContent type system; LLM "tweak" feature with scope + history</li>
+        <li>Partner <code>/p/{slug}/hub</code>, engagement webhook, win/loss capture, NDIS-platform gaps closed</li>
+      </ul>
+    </div>
+
+    <!-- NEW: Paid Ads -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">Paid Ads &mdash; Snapshot &amp; Optimiser</div>
+        <div class="init-range">9&ndash;20 May</div>
+      </div>
+      <div class="init-desc">Read-only Meta + Google performance intelligence. A daily LLM-narrated Snapshot, an all-campaign performance view + monthly budget tracker, Google Optimiser search-term clustering, and a GitHub Actions cron syncing Databricks &rarr; MySQL &rarr; snapshot.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">Marketing</span>
+        <span class="init-tag">AI</span>
+      </div>
+      <ul class="init-list">
+        <li>v1 daily Snapshot &mdash; Meta + Google via Databricks, LLM-narrated read</li>
+        <li>v1.5 funnel + heatmap + flagged anomalies; v2.B channel-level true CPF</li>
+        <li>All-campaign view + monthly budget tracker; Meta data via the MCP gateway</li>
+        <li>GHA Databricks sync + Python KPI pre-compute + server/client caching</li>
+      </ul>
+    </div>
+
+    <!-- NEW: Marketing Intelligence + Mission Control -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">Marketing Intelligence &amp; Mission Control</div>
+        <div class="init-range">10&ndash;18 May</div>
+      </div>
+      <div class="init-desc">A cross-source Marketing Intelligence page (funnel, channel mix, attribution, forecast, creative leaderboard, geo heatmap, daily AI read) and Mission Control v0.1&ndash;v0.4 &mdash; editable prompts for all agents, operating procedures, a live agent graph, and a release-notes audit log.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">Marketing</span>
+      </div>
+      <ul class="init-list">
+        <li>Marketing Intelligence wired to live data across every section</li>
+        <li>Attribution + Forecast live; Campaign Context in the Daily Read</li>
+        <li>Mission Control &mdash; editable prompts for all agents, audit via Prompt Engineer Agent</li>
+      </ul>
+    </div>
+
+    <!-- NEW: ORM tooling -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">ORM / online-reputation tooling</div>
+        <div class="init-range">17&ndash;19 May</div>
+      </div>
+      <div class="init-desc">Online-reputation management hardening: a PR review pass (auto-redact, dash strip, AI-detection gate), Research Mode scaffold, a knowledge base seeded with the 24-entry team FAQ, Seek + Glassdoor as reply platforms, and ORM Escalation v2 with an employer route.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">Marketing</span>
+      </div>
+      <ul class="init-list">
+        <li>PR review pass &mdash; auto-redact, dash strip, AI detection</li>
+        <li>Knowledge base + call-to-action rule; 24-entry FAQ sheet seeded</li>
+        <li>Seek + Glassdoor added as reply platforms</li>
+        <li>ORM Escalation v2 &mdash; procedure-complete intake + employer route</li>
+      </ul>
+    </div>
+
+    <!-- NEW: LLM architecture hardening -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">LLM architecture hardening</div>
+        <div class="init-range">20 May</div>
+      </div>
+      <div class="init-desc">Typed AI wrappers and a feature contract for the <code>/api/ai</code> proxy, per-call observability with feature attribution, an <code>/admin/llm-usage</code> dashboard, and migration of four features off the private bypass path.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">Backend</span>
+        <span class="init-tag">Security</span>
+      </div>
+      <ul class="init-list">
+        <li>Typed AI wrappers + feature contract for <code>/api/ai</code></li>
+        <li>Per-call observability with feature attribution</li>
+        <li>comms_intake, roadmap_agent, website_audit, health_checks migrated off the bypass</li>
+      </ul>
+    </div>
+
+    <!-- NEW: Copywriter + Writer -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">Copywriter, Writer &amp; Headshots</div>
+        <div class="init-range">13&ndash;20 May</div>
+      </div>
+      <div class="init-desc">A unified Copywriter (7 parallel review LLM calls, AI-detection engine, humanizer, PR mode), a simpler company-wide Writer, and a Headshot Processor upgrade (YuNet + SFace, three-step review wizard).</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">Marketing</span>
+        <span class="init-tag">AI</span>
+      </div>
+      <ul class="init-list">
+        <li>Copywriter &mdash; 7 parallel LLM review calls, AI detection 2, humanizer voice samples</li>
+        <li>Company-wide Writer &mdash; simpler sibling of the marketing Copywriter</li>
+        <li>Headshot Processor &mdash; YuNet + SFace, three-step wizard</li>
+      </ul>
+    </div>
+
+    <!-- NEW: UI loading system + Sales cockpit -->
+    <div class="init-card">
+      <div class="init-head">
+        <div class="init-title">Loading system, Sales cockpit &amp; nav</div>
+        <div class="init-range">17&ndash;20 May</div>
+      </div>
+      <div class="init-desc">AgentLoader + OrbitLoader loading animations with a Loader Lab, the Sales hub rebuilt as a live cockpit, a shared RelatedTools strip across Sales boards, GROW tools re-grouped by discipline, and hub pages for Copywriter / Paid Ads / Writer.</div>
+      <div class="init-tags">
+        <span class="init-tag live">Live</span>
+        <span class="init-tag">UX</span>
+        <span class="init-tag">Nav</span>
+      </div>
+      <ul class="init-list">
+        <li>AgentLoader + OrbitLoader loading system + Loader Lab</li>
+        <li>Sales hub rebuilt as a live cockpit; shared RelatedTools strip</li>
+        <li>GROW area tools re-grouped by discipline; Copywriter / Paid Ads / Writer hubs</li>
+      </ul>
+    </div>
 
     <!-- 1 Foundation + AppShell -->
     <div class="init-card">
@@ -698,10 +854,239 @@
 
   <div class="timeline-wrap">
     <div class="timeline-toolbar">
-      <span class="tt-label">20 active days &middot; 248 commits</span>
+      <span class="tt-label">35+ active days &middot; 600+ commits</span>
       <button class="tt-btn" id="expand-toggle" type="button">Expand all</button>
     </div>
     <div class="timeline" id="timeline">
+
+      <!-- 2026-05-22 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">22 May 2026</div>
+          <div class="day-num">Fri &middot; Day 45</div>
+          <span class="day-count">repo tidy</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">repo-root declutter (#388, open) &mdash; tidy stray files at the repo root</span></div>
+          <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">/admin/llm-usage dashboard refinement (#382, open)</span></div>
+          <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">file_extraction off the Anthropic SDK (#380, open &mdash; speculative)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-20 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">20 May 2026</div>
+          <div class="day-num">Tue &middot; Day 43</div>
+          <span class="day-count">22 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">llm: typed AI wrappers + feature contract for /api/ai proxy (#377)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">llm: per-call observability with feature attribution (#369)</span></div>
+          <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">llm: migrate comms_intake_ai + roadmap_agent off the private bypass (#372)</span></div>
+          <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">llm: migrate website_audit + health_checks off the private bypass (#379)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: GitHub Actions cron syncs Databricks &rarr; MySQL &rarr; snapshot (#366)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: pre-compute KPIs + channel rollup in Python (#370)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">perf: cache Paid Ads + Sales hub responses (server + client) (#371)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: server-side cache for Call Quality + Refresh button (#381)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">company: add company-wide Writer &mdash; simpler sibling of Copywriter (#368)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">hubs: surface Copywriter, Paid Ads, and Writer on their hub pages (#376)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">call-quality: three bugs on the review detail page (#378)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">drop committed frontend/node_modules symlink &mdash; broke Docker build (#373)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">lead-quality: point stamping coverage at live attribution columns (#346)</span></div>
+          <div class="day-item"><span class="di-prefix test">test</span><span class="di-text">pass-through the response_cache in every backend test (#383)</span></div>
+          <div class="day-item"><span class="di-prefix ux">ux</span><span class="di-text">nav + sales: sentence-case Call Quality / Client Lookup / hub labels + semantic tokens (#375, #384, #385, #386)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-19 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">19 May 2026</div>
+          <div class="day-num">Mon &middot; Day 42</div>
+          <span class="day-count">13 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: add Seek and Glassdoor as ORM reply platforms (#353)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: Escalation v2 &mdash; procedure-complete intake + employer route (#359)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">headshots: upgrade to YuNet + SFace, group&rarr;finalize flow (#360)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">headshots: three-step review wizard for the Headshot Processor (#358)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">ui: OrbitLoader (20s countdown) + loader alternatives + Loader Lab (#357)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">ui: adopt OrbitLoader as the GROW loading screen (#356)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">tasks: add weekly policy-checker compliance watch (#355)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: source Meta data from the MCP gateway (#361)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">paid-ads: tool_choice reliability fixes for the LLM service (#363, #364)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">deps: cap PyMySQL below 1.2 to unbreak the build (#362)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">copywriter: move the amendments tile to Haiku for a faster review (#354)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-18 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">18 May 2026</div>
+          <div class="day-num">Sun &middot; Day 41</div>
+          <span class="day-count">7 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: instant post-call review &mdash; Aircall webhook (#345)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: rep-facing "Your calls" view (#342)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: coaching loop &mdash; focus banner + Playbook deep-link (#343)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: surface auto-review activity + access-restricted state (#340)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-intelligence: wire Attribution + Forecast to live data (#349)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-intelligence: add Campaign Context for the Daily Read (#351)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: connect the islands &mdash; shared RelatedTools strip (#344)</span></div>
+          <div class="day-item"><span class="di-prefix chore">revert</span><span class="di-text">revert: route Aircall through the TC MCP gateway (#348 shipped, then #350 reverted after testing)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-17 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">17 May 2026</div>
+          <div class="day-num">Sat &middot; Day 40</div>
+          <span class="day-count">13 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: PR review pass &mdash; auto-redact, dash strip, AI detection (#324)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: Research Mode &mdash; TC Assistant context check (scaffold) (#325)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">orm: knowledge base + call-to-action rule; seed with team FAQ sheet (#326, #328)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: all-campaign performance + monthly budget tracker (#336)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: close NDIS-platform gaps &mdash; template feedback + image upload (#335)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">ui: AgentLoader loading animation + GROW app framework doc (#329)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">sales: turn the Sales hub into a live cockpit (#332)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">copywriter: add PR mode &mdash; draft public responses + auto-review (#323)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">nav: group GROW area tools by discipline, not workflow stage (#327)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: consistent error + friendly empty states; standardise chrome (#331, #333, #334)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">call-quality: correct scores_json parsing + lift aggregation cap (#322)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">nav: restore Client Lookup + Sales Playbook to Sales nav (#338)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-15 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">15 May 2026</div>
+          <div class="day-num">Thu &middot; Day 38</div>
+          <span class="day-count">13 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 3 &mdash; review trigger + status polling; backend pipeline + Celery (#310, #311)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 4 &mdash; Celery Beat auto-pipeline + admin panel (#312, #314)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 5 &mdash; coaching card, Word doc + Teams delivery (#313, #315)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: wire Nick's source pitch deck URLs onto template cards (#296)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: SlideContent types + all slide-cluster content + LLM tweak feature (#297, #316, #317)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">brand-profiles: one-click competitor seed + External Comms Hub sidebar group (#318)</span></div>
+          <div class="day-item"><span class="di-prefix security">sec</span><span class="di-text">add robots.ts + strengthen metadata.robots (#285)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">alembic: linearise migration chain &mdash; dedupe 0035, fork at 0038/0039 (#320)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">call-quality: restore Phase 2 frontend clobbered by a rebase (#319)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-14 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">14 May 2026</div>
+          <div class="day-num">Wed &middot; Day 37</div>
+          <span class="day-count">7 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 1 scaffold + sales-leader gate; Phase 2 read-only dashboards (#302, #303, #306)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">call-quality: Phase 3 backend &mdash; Aircall + review pipeline + Celery (#311)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: Phase 11 editor polish + engagement webhook + win/loss; Phase 12 live presentation + PPTX (#293, #295)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">linear: top-level Linear Tickets board with cached Marketing-team feed (#294)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-13 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">13 May 2026</div>
+          <div class="day-num">Tue &middot; Day 36</div>
+          <span class="day-count">28 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">bd-proposals: Phases 1&ndash;10 &mdash; foundation, slide infra, public viewer, authoring wizard, PDF export, in-editor AI, Nick-parity UI, partner hub (#273&ndash;#292)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing-intelligence: promote dream layout to live page; wire Funnel, Channel Mix, Lead Quality, Brand Health, Anomalies, Geo, Daily Read, Creative Leaderboard (#276&ndash;#290)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">copywriter: unified scaffold &mdash; real backend with 7 parallel LLM calls, AI detection 2, humanizer, templates (#266, #268, #269, #270)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: Marketing Intelligence tile &mdash; cross-source data summary (#271)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">paid-ads / lead-quality: bound Databricks + LLM with degraded fallback; Redis cache + stale fallback (#264, #280)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-11 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">11 May 2026</div>
+          <div class="day-num">Sun &middot; Day 34</div>
+          <span class="day-count">21 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">mission-control: v0.3 editable prompts for all agents + audit; v0.4 operating procedures, live graph, release notes (#247, #249, #251, #254)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: v2.B Lead Quality channel-level true CPF + LLM advisor + Snapshot cross-cut (#252, #255, #256)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: Social Sentiment Capture &mdash; paste FB groups / Reddit / IG, get audience intel (#246)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">intake: blog_article + paid_media + orm_reply routing; pre-submission validation gate (#244, #245)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">marketing: inbox status board &mdash; high-level Linear queue view (#226)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">linear-agents: label-driven firing &mdash; only run agents matching issue labels (#224)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">grow: restore /dashboards page deleted by #210 &mdash; Jackie uses these reports (#238)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-10 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">10 May 2026</div>
+          <div class="day-num">Sat &middot; Day 33</div>
+          <span class="day-count">19 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">mission-control: v0.1&ndash;v0.4 &mdash; page shell, System Snapshot/Health, Scope of Work, Pipeline kanban, Quality (#211&ndash;#223)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: live Databricks data + 30d/6m windows; v1.5 funnel + heatmap + anomalies; v2.C Google Optimiser (#212, #213, #221, #228)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">analytics: Client Balance Sheet dashboard + CEO Pulse Card (#229, #232)</span></div>
+          <div class="day-item"><span class="di-prefix chore">chore</span><span class="di-text">admin: fold redundant admin tabs + pages into Mission Control (#227)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-09 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">9 May 2026</div>
+          <div class="day-num">Fri &middot; Day 32</div>
+          <span class="day-count">4 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">paid-ads: v1 daily snapshot &mdash; Meta + Google via Databricks &rarr; LLM-narrated read (#200)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">msi: minimalist redesign &mdash; Apple Health / Stripe direction (#203)</span></div>
+          <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">linear: route all Linear access through TC Assistant tools (#204)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-08 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">8 May 2026</div>
+          <div class="day-num">Thu &middot; Day 31</div>
+          <span class="day-count">6 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">home: dashboard v3 &mdash; KPI row, recent activity, pulse charts (#192)</span></div>
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">skills: grow-reviewer &mdash; GROW-only reviewer with learning ledger (#193)</span></div>
+          <div class="day-item"><span class="di-prefix refactor">refactor</span><span class="di-text">llm: route remaining user-context callers + Linear webhook agents through the LLM service (#191, #197)</span></div>
+          <div class="day-item"><span class="di-prefix fix">fix</span><span class="di-text">marketing: list endpoints 401 on mount &mdash; route through authed apiClient (#194)</span></div>
+        </div>
+      </div>
+
+      <!-- 2026-05-06 -->
+      <div class="day-block">
+        <div class="day-meta">
+          <div class="day-date">6 May 2026</div>
+          <div class="day-num">Tue &middot; Day 29</div>
+          <span class="day-count">9 PRs</span>
+        </div>
+        <div class="day-items">
+          <div class="day-item"><span class="di-prefix feat">feat</span><span class="di-text">grow-ui: overnight UX overhaul &mdash; IA pass, AppSidebar removed, home redesign, button + badge + token consolidation (#181&ndash;#189)</span></div>
+        </div>
+      </div>
 
       <!-- 2026-05-03 -->
       <div class="day-block">
@@ -1183,22 +1568,22 @@
   <div class="sec-sub">Things shipped but waiting on something external, plus open judgment calls.</div>
 
   <div class="inflight-grid">
-    <div class="inflight-card blocker">
-      <div class="if-label">Blocker</div>
-      <div class="if-title">M2M auth for the weekly Roadmap Agent cron</div>
-      <div class="if-detail">v1 ships with manual trigger and a weekly schedule, but the unattended cron path needs machine-to-machine auth wired up before it runs without a human. Manual trigger works today.</div>
+    <div class="inflight-card">
+      <div class="if-label">Open PR</div>
+      <div class="if-title">Repo-root declutter (#388)</div>
+      <div class="if-detail">Tidies stray files at the repo root. Open, awaiting self-merge.</div>
     </div>
 
     <div class="inflight-card">
-      <div class="if-label">Deferred polish</div>
-      <div class="if-title">Admin background consistency</div>
-      <div class="if-detail">Admin pages have minor background-tone drift across <code>/admin</code>, <code>/admin/sla</code>, <code>/admin/health-checks</code>. Cosmetic, low priority.</div>
+      <div class="if-label">Open PR</div>
+      <div class="if-title">/admin/llm-usage dashboard refinement (#382)</div>
+      <div class="if-detail">Polish on the per-call LLM observability dashboard shipped on 20 May. Open.</div>
     </div>
 
-    <div class="inflight-card">
-      <div class="if-label">Deferred polish</div>
-      <div class="if-title">Home next-to-do hero pulse</div>
-      <div class="if-detail">The "what's next" hero on the home page lacks the subtle pulse cue that the live agent ticker has. Visual consistency item.</div>
+    <div class="inflight-card judgment">
+      <div class="if-label">Open PR &middot; speculative</div>
+      <div class="if-title">file_extraction off the Anthropic SDK (#380)</div>
+      <div class="if-detail">Continues the LLM-bypass cleanup &mdash; moves the file_extraction feature onto the internal LLM service. Open, marked speculative pending review.</div>
     </div>
 
     <div class="inflight-card">
@@ -1207,17 +1592,17 @@
       <div class="if-detail">Partner Collateral has the Canva integration service stubbed and env-var gated. Waiting on api_key + brand_kit_id + 3 template IDs to prove the local Canva integration (TRI-397).</div>
     </div>
 
-    <div class="inflight-card judgment">
-      <div class="if-label">Judgment call</div>
-      <div class="if-title">Sales vs BD area boundaries</div>
-      <div class="if-detail">Sales-rep tools (Sales Playbook, Coordinator Lookup, TL REM Calculator) now sit under <code>/sales</code>, not <code>/business-development</code>. Tracking which BD-tagged tools also belong on the Sales side.</div>
+    <div class="inflight-card">
+      <div class="if-label">Parked</div>
+      <div class="if-title">Aircall API keys for Call Quality</div>
+      <div class="if-detail">Call Quality runs end-to-end; the deeper Aircall integration is parked pending dedicated Aircall API keys. The MCP-gateway routing experiment (#348) was shipped then reverted (#350) &mdash; GROW went direct.</div>
     </div>
 
   </div>
 </section>
 
 <footer>
-  <div class="fl">Last updated: <strong style="color: var(--text);">4 May 2026</strong> &middot; Day 20 of GROW &middot; Day 44 of Trilogy</div>
+  <div class="fl">Last updated: <strong style="color: var(--text);">22 May 2026</strong> &middot; Day 45 of GROW &middot; Day 62 of Trilogy</div>
   <div class="fr">Auto-derived from <a href="https://github.com/Trilogy-Care/tc-grow-applications" target="_blank">tc-grow-applications</a> git history.</div>
 </footer>
 
